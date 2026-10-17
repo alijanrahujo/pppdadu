@@ -102,7 +102,7 @@
                 <a class="site-menu-item {{ request()->routeIs('pages.media-gallery') ? 'active' : '' }}" href="{{ route('pages.media-gallery') }}">
                     <i class="fa-regular fa-image" aria-hidden="true"></i><span>Media Gallery</span>
                 </a>
-                <a class="site-menu-item " href="">
+                <a class="site-menu-item {{ request()->routeIs('pages.members') ? 'active' : '' }}" href="{{ route('pages.members') }}">
                     <i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>Members Area</span>
                 </a>
                 <a class="site-menu-item {{ request()->routeIs('pages.join') ? 'active' : '' }}" href="{{ route('pages.join') }}">
@@ -137,6 +137,7 @@
                         <a href="{{ route('pages.municipal-bodies') }}">Municipal &amp; Town Bodies</a>
                         <a href="{{ route('pages.union-council-bodies') }}">Union Council Bodies</a>
                         <a href="{{ route('pages.media-gallery') }}">Media Gallery</a>
+                        <a href="{{ route('pages.members') }}">Members Area</a>
                     </nav>
                 </div>
                 <div class="col-lg-4">

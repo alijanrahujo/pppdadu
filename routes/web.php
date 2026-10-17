@@ -29,6 +29,7 @@ Route::controller(PublicPageController::class)->group(function () {
     Route::get('/organization/district-body', 'showDistrictBody')->name('pages.district-body');
     Route::get('/organization/municipal-bodies', 'showMunicipalBodies')->name('pages.municipal-bodies');
     Route::get('/organization/union-council-bodies', 'showUnionCouncilBodies')->name('pages.union-council-bodies');
+    Route::get('/media-gallery', 'showMediaGallery')->name('pages.media-gallery');
     Route::get('/members-area', 'showMembers')->name('pages.members');
     Route::get('/members', 'showMembers');
     Route::get('/join', 'showMembership')->name('pages.join');

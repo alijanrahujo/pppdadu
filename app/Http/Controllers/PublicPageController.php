@@ -94,6 +94,11 @@ class PublicPageController extends Controller
         return $this->page('media-gallery');
     }
 
+    public function showMembers(): View
+    {
+        return $this->page('members-area');
+    }
+
     public function showMembership(): View
     {
         return $this->page('join');
@@ -399,6 +404,55 @@ class PublicPageController extends Controller
                 'eyebrow' => 'Our activities',
                 'subtitle' => 'Moments from our activities',
                 'images' => $images,
+            ];
+        } elseif ($slug === 'members-area' || $slug === 'members') {
+            $s = SiteSetting::getGroup('page_members_area');
+            $request = request();
+            $search = $request->query('search');
+            $wing = $request->query('wing');
+            $city = $request->query('city');
+
+            $query = Membership::query()->latest();
+
+            if (! empty($search)) {
+                $search = trim((string) $search);
+                $query->where(function ($q) use ($search) {
+                    $q->where('first_name', 'like', "%{$search}%")
+                        ->orWhere('last_name', 'like', "%{$search}%")
+                        ->orWhere('tehsil_city', 'like', "%{$search}%")
+                        ->orWhere('profession', 'like', "%{$search}%")
+                        ->orWhere('member_type', 'like', "%{$search}%");
+                });
+            }
+
+            if (! empty($wing) && $wing !== 'all') {
+                $query->where('member_type', $wing);
+            }
+
+            if (! empty($city) && $city !== 'all') {
+                $query->where('tehsil_city', $city);
+            }
+
+            $members = $query->paginate(12)->withQueryString();
+
+            $stats = [
+                'total' => Membership::count(),
+                'primary' => Membership::where('member_type', 'Primary Member')->count(),
+                'youth' => Membership::where('member_type', 'Youth Wing')->count(),
+                'women' => Membership::where('member_type', 'Women Wing')->count(),
+            ];
+
+            $page = [
+                'type' => 'members',
+                'layout' => 'members',
+                'title' => $s['members.title'] ?? 'Members Area',
+                'eyebrow' => $s['members.eyebrow'] ?? 'Our Strength',
+                'subtitle' => $s['members.subtitle'] ?? 'Registered members and volunteers of Pakistan Peoples Party District Dadu.',
+                'members' => $members,
+                'stats' => $stats,
+                'search' => $search,
+                'wing' => $wing,
+                'city' => $city,
             ];
         } elseif ($slug === 'join') {
             $s = SiteSetting::getGroup('page_join');

@@ -5,7 +5,7 @@
 
 @section('content')
 <main>
-    @unless (in_array($page['layout'] ?? null, ['president', 'general-secretary', 'district-body', 'leadership', 'union-councils', 'municipal-bodies', 'media-gallery', 'membership', 'contact'], true))
+    @unless (in_array($page['layout'] ?? null, ['president', 'general-secretary', 'district-body', 'leadership', 'union-councils', 'municipal-bodies', 'media-gallery', 'membership', 'contact', 'members'], true))
         <section class="page-banner">
             <div class="container">
                 <nav aria-label="Breadcrumb">
@@ -21,7 +21,7 @@
         </section>
     @endunless
 
-    <section class="page-main section-space {{ in_array($page['layout'] ?? null, ['president', 'general-secretary', 'district-body', 'leadership', 'union-councils'], true) ? 'president-page-main' : '' }} {{ ($page['layout'] ?? null) === 'media-gallery' ? 'media-gallery-page-main' : '' }} {{ ($page['layout'] ?? null) === 'membership' ? 'membership-page-main' : '' }} {{ ($page['layout'] ?? null) === 'contact' ? 'contact-page-main' : '' }} {{ ($page['layout'] ?? null) === 'municipal-bodies' ? 'municipal-page-main' : '' }}">
+    <section class="page-main section-space {{ in_array($page['layout'] ?? null, ['president', 'general-secretary', 'district-body', 'leadership', 'union-councils'], true) ? 'president-page-main' : '' }} {{ ($page['layout'] ?? null) === 'media-gallery' ? 'media-gallery-page-main' : '' }} {{ in_array($page['layout'] ?? null, ['membership', 'members'], true) ? 'membership-page-main' : '' }} {{ ($page['layout'] ?? null) === 'contact' ? 'contact-page-main' : '' }} {{ ($page['layout'] ?? null) === 'municipal-bodies' ? 'municipal-page-main' : '' }}">
         <div class="container">
             @if (session('status'))
                 <div class="alert alert-success submission-alert" role="status">{{ session('status') }}</div>
@@ -282,6 +282,8 @@
                 </div>
             @elseif (($page['layout'] ?? null) === 'membership' || ($page['type'] ?? null) === 'membership')
                 @include('pages.membership')
+            @elseif (($page['layout'] ?? null) === 'members' || ($page['type'] ?? null) === 'members')
+                @include('pages.members')
             @elseif ($page['type'] === 'contact')
                 <header class="contact-page-heading">
                     <h1>Suggestions/ <span>Complaints/</span> <strong>Contacts</strong></h1>
@@ -330,7 +332,7 @@
                 </section>
             @endif
 
-            @unless ($page['type'] === 'membership' || in_array($page['layout'] ?? null, ['president', 'general-secretary', 'district-body', 'leadership', 'union-councils', 'municipal-bodies', 'media-gallery', 'contact'], true))
+            @unless ($page['type'] === 'membership' || in_array($page['layout'] ?? null, ['president', 'general-secretary', 'district-body', 'leadership', 'union-councils', 'municipal-bodies', 'media-gallery', 'contact', 'members'], true))
                 <section class="page-join-cta">
                     <div>
                         <span class="eyebrow">Be part of the change</span>
@@ -341,7 +343,7 @@
                 </section>
             @endunless
 
-            @unless (in_array($page['layout'] ?? null, ['president', 'general-secretary', 'district-body', 'leadership', 'union-councils', 'municipal-bodies', 'media-gallery', 'membership', 'contact'], true))
+            @unless (in_array($page['layout'] ?? null, ['president', 'general-secretary', 'district-body', 'leadership', 'union-councils', 'municipal-bodies', 'media-gallery', 'membership', 'contact', 'members'], true))
                 <nav class="page-directory" aria-label="Other district pages">
                     <span class="eyebrow">Explore more</span>
                     <div>

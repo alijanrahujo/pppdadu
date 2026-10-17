@@ -23,6 +23,7 @@ class PublicPagesTest extends TestCase
             'pages.municipal-bodies' => 'Local Representatives',
             'pages.union-council-bodies' => 'Haji Ghulam Murtaza',
             'pages.media-gallery' => 'Media Gallery',
+            'pages.members' => 'Members',
             'pages.join' => 'Join Pakistan Peoples Party Today!',
             'pages.contact' => 'Send your',
         ];
@@ -105,6 +106,15 @@ class PublicPagesTest extends TestCase
                     ->assertSee('media-gallery-card', false);
 
                 $this->assertSame(8, substr_count($page->getContent(), 'class="col-6 col-md-4 col-lg-3 media-gallery-card"'));
+            }
+
+            if ($routeName === 'pages.members') {
+                $page->assertSee('Members')
+                    ->assertSee('Area')
+                    ->assertSee('Total Members')
+                    ->assertSee('Primary Members')
+                    ->assertSee('Youth Wing')
+                    ->assertSee('Women Wing');
             }
 
             if ($routeName === 'pages.join') {
