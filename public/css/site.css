@@ -1949,8 +1949,8 @@ textarea.form-control {
 
 .hero-face-frame {
     position: relative;
-    width: 66px;
-    height: 66px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     padding: 2.5px;
     background: linear-gradient(135deg, #ffd83d 0%, #0b603d 50%, #d6272f 100%);
@@ -1977,8 +1977,8 @@ textarea.form-control {
 
 /* Center leaders (Zulfikar Ali Bhutto & Benazir Bhutto) slightly crowned */
 .hero-face-frame-center {
-    width: 76px;
-    height: 76px;
+    width: 100px;
+    height: 100px;
     padding: 3px;
     background: linear-gradient(135deg, #ffd83d 0%, #ffffff 45%, #ffd83d 75%, #0b603d 100%);
     box-shadow: 0 8px 22px rgba(0, 0, 0, 0.7), 0 0 14px rgba(255, 216, 61, 0.55);
@@ -2001,6 +2001,7 @@ textarea.form-control {
     white-space: nowrap;
     max-width: 160px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    text-wrap: balance;
 }
 
 .hero-face-card-center .hero-face-name {
@@ -2117,7 +2118,7 @@ textarea.form-control {
 
 .hero-leader {
     z-index: 1;
-    max-width: 30%;
+    max-width: 25%;
     height: min(84%, 510px);
 }
 
@@ -2722,20 +2723,21 @@ textarea.form-control {
     }
 
     .hero-face-frame {
-        width: 54px;
-        height: 54px;
+        width: 80px;
+        height: 80px;
         padding: 2px;
     }
 
     .hero-face-frame-center {
-        width: 62px;
-        height: 62px;
+        width: 80px;
+        height: 80px;
     }
 
     .hero-face-name {
         font-size: 10px;
         max-width: 90px;
         padding: 2px 6px;
+        text-wrap: balance;
     }
 
     .hero-face-card-center .hero-face-name {
@@ -2773,20 +2775,21 @@ textarea.form-control {
     }
 
     .hero-face-frame {
-        width: 44px;
-        height: 44px;
+        width: 60px;
+        height: 60px;
         padding: 1.5px;
     }
 
     .hero-face-frame-center {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
     }
 
     .hero-face-name {
         font-size: 8.5px;
         max-width: 62px;
         padding: 1px 4px;
+        text-wrap: balance;
     }
 
     .hero-face-card-center .hero-face-name {

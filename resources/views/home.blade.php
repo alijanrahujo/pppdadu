@@ -82,7 +82,7 @@
                 <a href="{{ $siteSettings['site.youtube'] ?? route('pages.media-gallery') }}" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
             </div>
         </div>
-        <img class="hero-leader hero-leader-left" src="{{ media_asset($hero['home.hero.leader_left'] ?? 'Assets/images/Respectful-Greeting-in-Charcoal-Kurta-1.png') }}" alt="Party leader greeting community members">
+        <img class="hero-leader hero-leader-left" src="Assets/images/asifa bhutto zardari.png" alt="Asifa Bhutto Zardari">
         <img class="hero-leader hero-leader-right" src="{{ media_asset($hero['home.hero.leader_right'] ?? 'Assets/images/Businessman-Explaining-with-Expressive-Hand-Gestures-1.png') }}" alt="Party leader speaking with community members">
     </section>
 
