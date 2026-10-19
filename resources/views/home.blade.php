@@ -83,7 +83,7 @@
             </div>
         </div>
         <img class="hero-leader hero-leader-left" src="Assets/images/asifa bhutto zardari.png" alt="Asifa Bhutto Zardari">
-        <img class="hero-leader hero-leader-right" src="{{ media_asset($hero['home.hero.leader_right'] ?? 'Assets/images/Businessman-Explaining-with-Expressive-Hand-Gestures-1.png') }}" alt="Party leader speaking with community members">
+        <img class="hero-leader hero-leader-right" src="Assets/images/Businessman-Explaining-with-Expressive-Hand-Gestures-1.png" alt="Party leader speaking with community members">
     </section>
 
     <!-- Party Values Strip -->
