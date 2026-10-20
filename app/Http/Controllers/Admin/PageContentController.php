@@ -29,6 +29,7 @@ class PageContentController extends Controller
             'role' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'quote' => ['required', 'string'],
+            'statement' => ['nullable', 'string'],
             'mission' => ['required', 'string'],
             'vision' => ['required', 'string'],
             'image' => ['nullable', 'string', 'max:255'],
@@ -50,6 +51,7 @@ class PageContentController extends Controller
         SiteSetting::set('president.role', $validated['role'], 'page_president');
         SiteSetting::set('president.description', $validated['description'], 'page_president', 'textarea');
         SiteSetting::set('president.quote', $validated['quote'], 'page_president', 'textarea');
+        SiteSetting::set('president.statement', $request->input('statement', ''), 'page_president', 'textarea');
         SiteSetting::set('president.mission', $validated['mission'], 'page_president', 'textarea');
         SiteSetting::set('president.vision', $validated['vision'], 'page_president', 'textarea');
         SiteSetting::set('president.principles', array_values($validated['principles']), 'page_president', 'json');
@@ -85,6 +87,7 @@ class PageContentController extends Controller
             'role' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'quote' => ['required', 'string'],
+            'statement' => ['nullable', 'string'],
             'image' => ['nullable', 'string', 'max:255'],
             'image_file' => ['nullable', 'image', 'max:5120'],
             'principles' => ['required', 'array'],
@@ -101,6 +104,7 @@ class PageContentController extends Controller
         SiteSetting::set('general_secretary.role', $validated['role'], 'page_general_secretary');
         SiteSetting::set('general_secretary.description', $validated['description'], 'page_general_secretary', 'textarea');
         SiteSetting::set('general_secretary.quote', $validated['quote'], 'page_general_secretary', 'textarea');
+        SiteSetting::set('general_secretary.statement', $request->input('statement', ''), 'page_general_secretary', 'textarea');
         SiteSetting::set('general_secretary.principles', array_values($validated['principles']), 'page_general_secretary', 'json');
         SiteSetting::set('general_secretary.commitments', array_values($validated['commitments']), 'page_general_secretary', 'json');
 
@@ -176,6 +180,73 @@ class PageContentController extends Controller
         SiteSetting::set('district_body.principles', array_values($validated['principles']), 'page_district_body', 'json');
 
         return back()->with('status', 'District Body page content updated successfully.');
+    }
+
+    /**
+     * Tehsil Bodies Page Content.
+     */
+    public function tehsilBodies(): View
+    {
+        $settings = SiteSetting::getGroup('page_tehsil_bodies');
+
+        return view('admin.pages.tehsil-bodies', compact('settings'));
+    }
+
+    public function updateTehsilBodies(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'eyebrow' => ['required', 'string', 'max:150'],
+            'subtitle' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'statistics' => ['nullable', 'array'],
+            'statistics.*.value' => ['required', 'string', 'max:50'],
+            'statistics.*.label' => ['required', 'string', 'max:100'],
+            'statistics.*.icon' => ['required', 'string', 'max:50'],
+            'statistics.*.color' => ['required', 'string', 'in:red,green'],
+            'tehsils' => ['nullable', 'array'],
+            'tehsils.*.name' => ['required', 'string', 'max:150'],
+            'tehsils.*.urdu_name' => ['nullable', 'string', 'max:150'],
+            'tehsils.*.tagline' => ['nullable', 'string', 'max:255'],
+            'tehsils.*.description' => ['nullable', 'string'],
+            'tehsils.*.image' => ['nullable', 'string', 'max:255'],
+            'tehsils.*.members' => ['nullable', 'array'],
+            'tehsils.*.members.*.name' => ['required', 'string', 'max:150'],
+            'tehsils.*.members.*.role' => ['required', 'string', 'max:150'],
+            'tehsils.*.members.*.phone' => ['nullable', 'string', 'max:50'],
+            'tehsils.*.members.*.image' => ['nullable', 'string', 'max:255'],
+            'priorities' => ['nullable', 'array'],
+            'priorities.*.title' => ['required', 'string', 'max:150'],
+            'priorities.*.description' => ['required', 'string'],
+            'priorities.*.icon' => ['required', 'string', 'max:50'],
+        ]);
+
+        SiteSetting::set('tehsil_bodies.title', $validated['title'], 'page_tehsil_bodies');
+        SiteSetting::set('tehsil_bodies.eyebrow', $validated['eyebrow'], 'page_tehsil_bodies');
+        SiteSetting::set('tehsil_bodies.subtitle', $validated['subtitle'], 'page_tehsil_bodies');
+        SiteSetting::set('tehsil_bodies.description', $validated['description'], 'page_tehsil_bodies', 'textarea');
+
+        if (isset($validated['statistics'])) {
+            SiteSetting::set('tehsil_bodies.statistics', array_values($validated['statistics']), 'page_tehsil_bodies', 'json');
+        }
+
+        if (isset($validated['tehsils'])) {
+            $tehsils = array_values($validated['tehsils']);
+            foreach ($tehsils as &$tehsil) {
+                if (isset($tehsil['members']) && is_array($tehsil['members'])) {
+                    $tehsil['members'] = array_values($tehsil['members']);
+                } else {
+                    $tehsil['members'] = [];
+                }
+            }
+            SiteSetting::set('tehsil_bodies.tehsils', $tehsils, 'page_tehsil_bodies', 'json');
+        }
+
+        if (isset($validated['priorities'])) {
+            SiteSetting::set('tehsil_bodies.priorities', array_values($validated['priorities']), 'page_tehsil_bodies', 'json');
+        }
+
+        return back()->with('status', 'Tehsil Bodies page content updated successfully.');
     }
 
     /**

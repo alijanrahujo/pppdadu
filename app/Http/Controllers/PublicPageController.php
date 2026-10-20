@@ -79,6 +79,11 @@ class PublicPageController extends Controller
         return $this->page('district-body');
     }
 
+    public function showTehsilBodies(): View
+    {
+        return $this->page('tehsil-bodies');
+    }
+
     public function showMunicipalBodies(): View
     {
         return $this->page('municipal-bodies');
@@ -271,6 +276,7 @@ class PublicPageController extends Controller
                 'description' => $s['president.description'] ?? 'Barrister Pir Mujeeb-ul-Haq is the District President of Pakistan Peoples Party District Dadu...',
                 'principles' => $s['president.principles'] ?? ["Advocate for People's Rights", 'Development Focused', 'Democracy & Justice', 'Community First'],
                 'quote' => $s['president.quote'] ?? 'Leadership is not about power, it is about responsibility and service to people.',
+                'statement' => $s['president.statement'] ?? "<p>“My mission is to serve the people of Dadu with honesty, transparency and dedication, and to build a stronger, progressive and united society.”</p>\n<cite>- Barrister Pir Mujeeb-ul-Haq</cite>\n<span>President, PPP District Dadu</span>",
                 'mission' => $s['president.mission'] ?? 'To serve the people of Dadu with honesty, transparency and dedication...',
                 'vision' => $s['president.vision'] ?? 'A democratic, peaceful and prosperous Dadu where every citizen has equal opportunities...',
                 'achievements' => $s['president.achievements'] ?? [],
@@ -287,9 +293,10 @@ class PublicPageController extends Controller
                 'image' => $s['general_secretary.image'] ?? 'gc-1024x1024.png',
                 'image_alt' => $s['general_secretary.name'] ?? 'Syed Naveed Ahmed Shah',
                 'role' => $s['general_secretary.role'] ?? 'General Secretary, Pakistan Peoples Party District Dadu',
-                'description' => $s['general_secretary.description'] ?? 'Syed Naveed Ahmed Shah is a committed party leader...',
+                'description' => $s['general_secretary.description'] ?? '<p>Syed Naveed Ahmed Shah is a committed party leader and an energetic organizer who works day and night for the strengthening of PPP in District Dadu.</p><p>He believes in teamwork, dedication and discipline and is focused on bringing the party vision to every corner of the district.</p>',
                 'principles' => $s['general_secretary.principles'] ?? ['Strong Leadership', 'Party Organization', 'Public Service', 'Youth Empowerment'],
-                'quote' => $s['general_secretary.quote'] ?? 'Our strength lies in our unity and our connection with the people...',
+                'quote' => $s['general_secretary.quote'] ?? 'Our strength lies in our unity and our connection with the people. Together, we can build a stronger, progressive and prosperous Dadu.',
+                'statement' => $s['general_secretary.statement'] ?? ('<p>“'.($s['general_secretary.quote'] ?? 'Our strength lies in our unity and our connection with the people. Together, we can build a stronger, progressive and prosperous Dadu.')."”</p>\n<cite>- ".($s['general_secretary.name'] ?? 'Syed Naveed Ahmed Shah')."</cite>\n<span>".($s['general_secretary.role'] ?? 'General Secretary, PPP District Dadu').'</span>'),
                 'commitments' => $s['general_secretary.commitments'] ?? [],
             ];
         } elseif ($slug === 'district-body') {
@@ -359,6 +366,93 @@ class PublicPageController extends Controller
                     ['title' => 'Social Justice', 'description' => 'Eliminating disparity, safeguarding human rights, and expanding healthcare and education access.', 'icon' => 'fa-scale-balanced'],
                     ['title' => 'Youth & Women Empowerment', 'description' => 'Providing progressive platforms and leadership roles for young activists and women in political life.', 'icon' => 'fa-handshake-angle'],
                 ],
+            ];
+        } elseif (in_array($slug, ['tehsil-bodies', 'tahseel-bodies', 'taseel-bodies'], true)) {
+            $s = SiteSetting::getGroup('page_tehsil_bodies');
+            $defaultTehsils = [
+                [
+                    'name' => 'Tehsil Dadu',
+                    'urdu_name' => 'تحصیل دادو',
+                    'tagline' => 'District Headquarters & Central Hub',
+                    'description' => 'Covering Dadu city and surrounding rural union councils with active party leadership dedicated to public welfare and infrastructure.',
+                    'image' => 'Assets/images/images.jpg',
+                    'members' => [
+                        ['role' => 'President', 'name' => 'Syed Zafar Ali Shah', 'phone' => '025-4551234', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                        ['role' => 'General Secretary', 'name' => 'Muhammad Aslam Panhwar', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                        ['role' => 'Senior Vice President', 'name' => 'Haji Ghulam Rasool Solangi', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                        ['role' => 'Information Secretary', 'name' => 'Liaquat Ali Jamali', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                        ['role' => 'Finance Secretary', 'name' => 'Tariq Hussain Memon', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                    ],
+                ],
+                [
+                    'name' => 'Tehsil Mehar',
+                    'urdu_name' => 'تحصیل میہڑ',
+                    'tagline' => 'Agricultural Heart & Vibrant Grassroots Network',
+                    'description' => 'Mobilizing agricultural workers, youth activists and rural families across the fertile taluka of Mehar.',
+                    'image' => 'Assets/images/images-4.jpg',
+                    'members' => [
+                        ['role' => 'President', 'name' => 'Sardar Ghulam Mustafa Mahisar', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                        ['role' => 'General Secretary', 'name' => 'Aijaz Ahmed Chandio', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                        ['role' => 'Senior Vice President', 'name' => 'Ali Nawaz Siyal', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                        ['role' => 'Information Secretary', 'name' => 'Kareem Bux Soomro', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                        ['role' => 'Finance Secretary', 'name' => 'Muhammad Ramzan Khoso', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                    ],
+                ],
+                [
+                    'name' => 'Tehsil Khairpur Nathan Shah',
+                    'urdu_name' => 'تحصیل خیرپور ناتھن شاہ',
+                    'tagline' => 'Resilient Leadership & People-First Public Service',
+                    'description' => 'Leading community rehabilitation, public health, clean water initiatives, and local party organizing throughout K.N. Shah.',
+                    'image' => 'Assets/images/images-2.jpg',
+                    'members' => [
+                        ['role' => 'President', 'name' => 'Mir Ghulam Shabbir Lund', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                        ['role' => 'General Secretary', 'name' => 'Nadeem Ahmed Kalhoro', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                        ['role' => 'Senior Vice President', 'name' => 'Ghulam Abbas Leghari', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                        ['role' => 'Information Secretary', 'name' => 'Barkat Ali Bughio', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                        ['role' => 'Finance Secretary', 'name' => 'Manzoor Hussain Chandio', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                    ],
+                ],
+                [
+                    'name' => 'Tehsil Johi',
+                    'urdu_name' => 'تحصیل جوہی',
+                    'tagline' => 'Kachho Foothills & Dedicated Community Organizing',
+                    'description' => 'Dedicated to empowering the rural and Kachho communities, ensuring water rights, and uplifting rural families across Johi.',
+                    'image' => 'Assets/images/images-3.jpg',
+                    'members' => [
+                        ['role' => 'President', 'name' => 'Mir Ahmed Khan Babar', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                        ['role' => 'General Secretary', 'name' => 'Syed Mazhar Ali Shah', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                        ['role' => 'Senior Vice President', 'name' => 'Sikandar Ali Rodnani', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                        ['role' => 'Information Secretary', 'name' => 'Ali Murad Rind', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                        ['role' => 'Finance Secretary', 'name' => 'Akhtar Hussain Jamali', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                    ],
+                ],
+            ];
+
+            $defaultStats = [
+                ['value' => '4', 'label' => 'Tehsils / Talukas', 'icon' => 'fa-landmark', 'color' => 'red'],
+                ['value' => '52+', 'label' => 'Union Councils', 'icon' => 'fa-people-roof', 'color' => 'green'],
+                ['value' => '100+', 'label' => 'Office Bearers', 'icon' => 'fa-user-group', 'color' => 'red'],
+                ['value' => '250+', 'label' => 'Ward & Village Units', 'icon' => 'fa-location-dot', 'color' => 'green'],
+                ['value' => '50k+', 'label' => 'Active Workers & Supporters', 'icon' => 'fa-users', 'color' => 'red'],
+            ];
+
+            $defaultPriorities = [
+                ['title' => 'Grassroots Mobilization', 'description' => 'Maintaining direct contact with workers and families across every village and ward.', 'icon' => 'fa-people-group'],
+                ['title' => 'Public Grievance Redressal', 'description' => 'Acting as the bridge between citizens and public administration to solve local problems.', 'icon' => 'fa-bullhorn'],
+                ['title' => 'Community Development', 'description' => 'Overseeing drinking water, rural education, health facilities and public infrastructure.', 'icon' => 'fa-chart-line'],
+                ['title' => 'Social Justice & Democracy', 'description' => 'Upholding Quaid-e-Awam and Shaheed Mohtarma Benazir Bhutto’s vision for equal rights and progress.', 'icon' => 'fa-scale-balanced'],
+            ];
+
+            $page = [
+                'type' => 'organization',
+                'layout' => 'tehsil-bodies',
+                'title' => $s['tehsil_bodies.title'] ?? 'Tehsil Bodies',
+                'eyebrow' => $s['tehsil_bodies.eyebrow'] ?? 'Grassroots Organization',
+                'subtitle' => $s['tehsil_bodies.subtitle'] ?? 'Working for the People across All 4 Tehsils of District Dadu',
+                'description' => $s['tehsil_bodies.description'] ?? '<p>Pakistan Peoples Party has a robust grassroots organizational network spread across all four tehsils of District Dadu: <strong>Dadu</strong>, <strong>Mehar</strong>, <strong>Khairpur Nathan Shah</strong>, and <strong>Johi</strong>.</p><p>Our dedicated Tehsil office bearers work relentlessly to mobilize party workers, address local community issues, and implement the progressive vision of our leadership at the town and village level.</p>',
+                'statistics' => $s['tehsil_bodies.statistics'] ?? $defaultStats,
+                'tehsils' => $s['tehsil_bodies.tehsils'] ?? $defaultTehsils,
+                'priorities' => $s['tehsil_bodies.priorities'] ?? $defaultPriorities,
             ];
         } elseif ($slug === 'municipal-bodies') {
             $s = SiteSetting::getGroup('page_municipal_bodies');

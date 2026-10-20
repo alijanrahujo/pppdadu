@@ -5,7 +5,7 @@
 
 @section('content')
 <main>
-    @unless (in_array($page['layout'] ?? null, ['president', 'general-secretary', 'district-body', 'leadership', 'union-councils', 'municipal-bodies', 'media-gallery', 'membership', 'contact', 'members'], true))
+    @unless (in_array($page['layout'] ?? null, ['president', 'general-secretary', 'district-body', 'tehsil-bodies', 'leadership', 'union-councils', 'municipal-bodies', 'media-gallery', 'membership', 'contact', 'members'], true))
         <section class="page-banner">
             <div class="container">
                 <nav aria-label="Breadcrumb">
@@ -21,7 +21,7 @@
         </section>
     @endunless
 
-    <section class="page-main section-space {{ in_array($page['layout'] ?? null, ['president', 'general-secretary', 'district-body', 'leadership', 'union-councils'], true) ? 'president-page-main' : '' }} {{ ($page['layout'] ?? null) === 'media-gallery' ? 'media-gallery-page-main' : '' }} {{ in_array($page['layout'] ?? null, ['membership', 'members'], true) ? 'membership-page-main' : '' }} {{ ($page['layout'] ?? null) === 'contact' ? 'contact-page-main' : '' }} {{ ($page['layout'] ?? null) === 'municipal-bodies' ? 'municipal-page-main' : '' }}">
+    <section class="page-main section-space {{ in_array($page['layout'] ?? null, ['president', 'general-secretary', 'district-body', 'tehsil-bodies', 'leadership', 'union-councils'], true) ? 'president-page-main' : '' }} {{ ($page['layout'] ?? null) === 'media-gallery' ? 'media-gallery-page-main' : '' }} {{ in_array($page['layout'] ?? null, ['membership', 'members'], true) ? 'membership-page-main' : '' }} {{ ($page['layout'] ?? null) === 'contact' ? 'contact-page-main' : '' }} {{ ($page['layout'] ?? null) === 'municipal-bodies' ? 'municipal-page-main' : '' }}">
         <div class="container">
             @if (session('status'))
                 <div class="alert alert-success submission-alert" role="status">{{ session('status') }}</div>
@@ -44,6 +44,8 @@
                 @include('pages.general-secretary')
             @elseif (($page['layout'] ?? null) === 'district-body')
                 @include('pages.district-body')
+            @elseif (($page['layout'] ?? null) === 'tehsil-bodies')
+                @include('pages.tehsil-bodies')
             @elseif (($page['layout'] ?? null) === 'leadership')
                 @include('pages.leadership')
             @elseif (($page['layout'] ?? null) === 'union-councils')

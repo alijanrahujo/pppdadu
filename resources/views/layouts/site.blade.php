@@ -66,8 +66,8 @@
                     </ul>
                 </div>
 
-                <div class="site-menu-dropdown dropdown {{ request()->routeIs('pages.district-body', 'pages.municipal-bodies', 'pages.union-council-bodies') ? 'active' : '' }}">
-                    <a class="site-menu-item dropdown-toggle {{ request()->routeIs('pages.district-body', 'pages.municipal-bodies', 'pages.union-council-bodies') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="site-menu-dropdown dropdown {{ request()->routeIs('pages.district-body', 'pages.tehsil-bodies', 'pages.municipal-bodies', 'pages.union-council-bodies') ? 'active' : '' }}">
+                    <a class="site-menu-item dropdown-toggle {{ request()->routeIs('pages.district-body', 'pages.tehsil-bodies', 'pages.municipal-bodies', 'pages.union-council-bodies') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-users" aria-hidden="true"></i>
                         <span>District Body <i class="fa-solid fa-chevron-down site-dropdown-caret" aria-hidden="true"></i></span>
                     </a>
@@ -79,7 +79,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item {{ request()->routeIs('pages.municipal-bodies') ? 'active' : '' }}" href="{{ route('pages.municipal-bodies') }}">
+                            <a class="dropdown-item {{ request()->routeIs('pages.tehsil-bodies') ? 'active' : '' }}" href="{{ route('pages.tehsil-bodies') }}">
                                 <i class="fa-solid fa-landmark" aria-hidden="true"></i>
                                 <span>Tahseel Bodies</span>
                             </a>
@@ -134,6 +134,7 @@
                         <a href="{{ route('pages.president') }}">About President</a>
                         <a href="{{ route('pages.general-secretary') }}">About General Secretary</a>
                         <a href="{{ route('pages.district-body') }}">District Body</a>
+                        <a href="{{ route('pages.tehsil-bodies') }}">Tahseel Bodies</a>
                         <a href="{{ route('pages.municipal-bodies') }}">Municipal &amp; Town Bodies</a>
                         <a href="{{ route('pages.union-council-bodies') }}">Union Council Bodies</a>
                         <a href="{{ route('pages.media-gallery') }}">Media Gallery</a>

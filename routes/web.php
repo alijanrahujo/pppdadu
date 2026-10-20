@@ -27,6 +27,9 @@ Route::controller(PublicPageController::class)->group(function () {
     Route::get('/about/leadership', 'showLeadership');
     Route::get('/organization/leadership', 'showLeadership');
     Route::get('/organization/district-body', 'showDistrictBody')->name('pages.district-body');
+    Route::get('/organization/tehsil-bodies', 'showTehsilBodies')->name('pages.tehsil-bodies');
+    Route::get('/organization/tahseel-bodies', 'showTehsilBodies');
+    Route::get('/organization/taseel-bodies', 'showTehsilBodies');
     Route::get('/organization/municipal-bodies', 'showMunicipalBodies')->name('pages.municipal-bodies');
     Route::get('/organization/union-council-bodies', 'showUnionCouncilBodies')->name('pages.union-council-bodies');
     Route::get('/media-gallery', 'showMediaGallery')->name('pages.media-gallery');
@@ -95,6 +98,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::get('/district-body', [PageContentController::class, 'districtBody'])->name('district-body');
             Route::post('/district-body', [PageContentController::class, 'updateDistrictBody'])->name('district-body.update');
+
+            Route::get('/tehsil-bodies', [PageContentController::class, 'tehsilBodies'])->name('tehsil-bodies');
+            Route::post('/tehsil-bodies', [PageContentController::class, 'updateTehsilBodies'])->name('tehsil-bodies.update');
 
             Route::get('/municipal-bodies', [PageContentController::class, 'municipalBodies'])->name('municipal-bodies');
             Route::post('/municipal-bodies', [PageContentController::class, 'updateMunicipalBodies'])->name('municipal-bodies.update');

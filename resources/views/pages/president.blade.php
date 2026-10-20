@@ -3,10 +3,10 @@
         <div class="president-intro-copy">
             <h1>About Our <span>President</span></h1>
             <h2>{{ $page['subtitle'] }}</h2>
-            <p class="president-role">MPA and District President</p>
+            <p class="president-role">{{ $page['role'] ?? 'MPA and District President' }}</p>
             <p class="president-party">Pakistan Peoples Party, District Dadu</p>
-            <p>Barrister Pir Mujeeb-ul-Haq is a dedicated leader, known for his unwavering commitment to democracy, social justice, and the welfare of the people.</p>
-            <p>With strong roots in public service and a vision for a progressive Dadu, he continues to work tirelessly for the rights of every citizen and the development of our district.</p>
+            
+            {!! $page['description'] !!} 
 
             <div class="president-principles">
                 @foreach ([
@@ -34,9 +34,7 @@
         <blockquote class="president-quote">
             <span class="quote-mark" aria-hidden="true">&rdquo;</span>
             <div>
-                <p>“My mission is to serve the people of Dadu with honesty, transparency and dedication, and to build a stronger, progressive and united society.”</p>
-                <cite>- Barrister Pir Mujeeb-ul-Haq</cite>
-                <span>President, PPP District Dadu</span>
+                {!! $page['statement'] ?? '<p>“My mission is to serve the people of Dadu with honesty, transparency and dedication, and to build a stronger, progressive and united society.”</p><cite>- Barrister Pir Mujeeb-ul-Haq</cite><span>President, PPP District Dadu</span>' !!}
             </div>
         </blockquote>
         <div class="president-statistics">

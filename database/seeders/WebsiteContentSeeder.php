@@ -98,6 +98,7 @@ class WebsiteContentSeeder extends Seeder
             ['key' => 'president.image', 'value' => 'Assets/images/mujeepir-1024x1024.png', 'group' => 'page_president', 'type' => 'text'],
             ['key' => 'president.description', 'value' => 'Barrister Pir Mujeeb-ul-Haq is the District President of Pakistan Peoples Party District Dadu and a member of the Provincial Assembly. His leadership page reflects the party’s focus on people’s rights, development and public service.', 'group' => 'page_president', 'type' => 'textarea'],
             ['key' => 'president.quote', 'value' => 'Leadership is not about power, it is about responsibility and service to people.', 'group' => 'page_president', 'type' => 'text'],
+            ['key' => 'president.statement', 'value' => "<p>“My mission is to serve the people of Dadu with honesty, transparency and dedication, and to build a stronger, progressive and united society.”</p>\n<cite>- Barrister Pir Mujeeb-ul-Haq</cite>\n<span>President, PPP District Dadu</span>", 'group' => 'page_president', 'type' => 'textarea'],
             ['key' => 'president.mission', 'value' => 'To serve the people of Dadu with honesty, transparency and dedication, and to build a stronger, progressive and united society.', 'group' => 'page_president', 'type' => 'textarea'],
             ['key' => 'president.vision', 'value' => 'A democratic, peaceful and prosperous Dadu where every citizen has equal opportunities to grow and succeed.', 'group' => 'page_president', 'type' => 'textarea'],
             ['key' => 'president.principles', 'value' => json_encode(["Advocate for People's Rights", 'Development Focused', 'Democracy & Justice', 'Community First']), 'group' => 'page_president', 'type' => 'json'],
@@ -124,6 +125,7 @@ class WebsiteContentSeeder extends Seeder
             ['key' => 'general_secretary.image', 'value' => 'Assets/images/gc-1024x1024.png', 'group' => 'page_general_secretary', 'type' => 'text'],
             ['key' => 'general_secretary.description', 'value' => 'Syed Naveed Ahmed Shah is a committed party leader and an energetic organizer who works day and night for the strengthening of PPP in District Dadu. He believes in teamwork, dedication and discipline and is focused on bringing the party vision to every corner of the district.', 'group' => 'page_general_secretary', 'type' => 'textarea'],
             ['key' => 'general_secretary.quote', 'value' => 'Our strength lies in our unity and our connection with the people. Together, we can build a stronger, progressive and prosperous Dadu.', 'group' => 'page_general_secretary', 'type' => 'text'],
+            ['key' => 'general_secretary.statement', 'value' => "<p>“Our strength lies in our unity and our connection with the people. Together, we can build a stronger, progressive and prosperous Dadu.”</p>\n<cite>- Syed Naveed Ahmed Shah</cite>\n<span>General Secretary, PPP District Dadu</span>", 'group' => 'page_general_secretary', 'type' => 'textarea'],
             ['key' => 'general_secretary.principles', 'value' => json_encode(['Strong Leadership', 'Party Organization', 'Public Service', 'Youth Empowerment']), 'group' => 'page_general_secretary', 'type' => 'json'],
             ['key' => 'general_secretary.commitments', 'value' => json_encode([
                 ['title' => 'People First', 'description' => 'Putting the people’s needs at the forefront of decisions and actions.', 'icon' => 'fa-people-group'],
@@ -164,6 +166,79 @@ class WebsiteContentSeeder extends Seeder
                 ['title' => 'Community Support', 'description' => 'Keeping local needs at the center of public service.', 'icon' => 'fa-people-group'],
                 ['title' => 'Public Welfare', 'description' => 'Working for the wellbeing of people across the district.', 'icon' => 'fa-hand-holding-heart'],
             ]), 'group' => 'page_municipal_bodies', 'type' => 'json'],
+
+            // Tehsil Bodies Page
+            ['key' => 'tehsil_bodies.title', 'value' => 'Tahseel Bodies', 'group' => 'page_tehsil_bodies', 'type' => 'text'],
+            ['key' => 'tehsil_bodies.eyebrow', 'value' => 'Grassroots Organization', 'group' => 'page_tehsil_bodies', 'type' => 'text'],
+            ['key' => 'tehsil_bodies.subtitle', 'value' => 'Working for the People across All 4 Tehsils of District Dadu', 'group' => 'page_tehsil_bodies', 'type' => 'text'],
+            ['key' => 'tehsil_bodies.description', 'value' => '<p>Pakistan Peoples Party has a robust grassroots organizational network spread across all four tehsils of District Dadu: <strong>Dadu</strong>, <strong>Mehar</strong>, <strong>Khairpur Nathan Shah</strong>, and <strong>Johi</strong>.</p><p>Our dedicated Tehsil office bearers work relentlessly to mobilize party workers, address local community issues, and implement the progressive vision of our leadership at the town and village level.</p>', 'group' => 'page_tehsil_bodies', 'type' => 'textarea'],
+            ['key' => 'tehsil_bodies.statistics', 'value' => json_encode([
+                ['value' => '4', 'label' => 'Tehsils / Talukas', 'icon' => 'fa-landmark', 'color' => 'red'],
+                ['value' => '52+', 'label' => 'Union Councils', 'icon' => 'fa-people-roof', 'color' => 'green'],
+                ['value' => '100+', 'label' => 'Office Bearers', 'icon' => 'fa-user-group', 'color' => 'red'],
+                ['value' => '250+', 'label' => 'Ward & Village Units', 'icon' => 'fa-location-dot', 'color' => 'green'],
+                ['value' => '50k+', 'label' => 'Active Workers & Supporters', 'icon' => 'fa-users', 'color' => 'red'],
+            ]), 'group' => 'page_tehsil_bodies', 'type' => 'json'],
+            ['key' => 'tehsil_bodies.tehsils', 'value' => json_encode([
+                [
+                    'name' => 'Tehsil Dadu',
+                    'urdu_name' => 'تحصیل دادو',
+                    'tagline' => 'District Headquarters & Central Hub',
+                    'description' => 'Covering Dadu city and surrounding rural union councils with active party leadership dedicated to public welfare and infrastructure.',
+                    'members' => [
+                        ['role' => 'President', 'name' => 'Syed Zafar Ali Shah', 'phone' => '025-4551234'],
+                        ['role' => 'General Secretary', 'name' => 'Muhammad Aslam Panhwar', 'phone' => ''],
+                        ['role' => 'Senior Vice President', 'name' => 'Haji Ghulam Rasool Solangi', 'phone' => ''],
+                        ['role' => 'Information Secretary', 'name' => 'Liaquat Ali Jamali', 'phone' => ''],
+                        ['role' => 'Finance Secretary', 'name' => 'Tariq Hussain Memon', 'phone' => ''],
+                    ],
+                ],
+                [
+                    'name' => 'Tehsil Mehar',
+                    'urdu_name' => 'تحصیل میہڑ',
+                    'tagline' => 'Agricultural Heart & Vibrant Grassroots Network',
+                    'description' => 'Mobilizing agricultural workers, youth activists and rural families across the fertile taluka of Mehar.',
+                    'members' => [
+                        ['role' => 'President', 'name' => 'Sardar Ghulam Mustafa Mahisar', 'phone' => ''],
+                        ['role' => 'General Secretary', 'name' => 'Aijaz Ahmed Chandio', 'phone' => ''],
+                        ['role' => 'Senior Vice President', 'name' => 'Ali Nawaz Siyal', 'phone' => ''],
+                        ['role' => 'Information Secretary', 'name' => 'Kareem Bux Soomro', 'phone' => ''],
+                        ['role' => 'Finance Secretary', 'name' => 'Muhammad Ramzan Khoso', 'phone' => ''],
+                    ],
+                ],
+                [
+                    'name' => 'Tehsil Khairpur Nathan Shah',
+                    'urdu_name' => 'تحصیل خیرپور ناتھن شاہ',
+                    'tagline' => 'Resilient Leadership & People-First Public Service',
+                    'description' => 'Leading community rehabilitation, public health, clean water initiatives, and local party organizing throughout K.N. Shah.',
+                    'members' => [
+                        ['role' => 'President', 'name' => 'Mir Ghulam Shabbir Lund', 'phone' => ''],
+                        ['role' => 'General Secretary', 'name' => 'Nadeem Ahmed Kalhoro', 'phone' => ''],
+                        ['role' => 'Senior Vice President', 'name' => 'Ghulam Abbas Leghari', 'phone' => ''],
+                        ['role' => 'Information Secretary', 'name' => 'Barkat Ali Bughio', 'phone' => ''],
+                        ['role' => 'Finance Secretary', 'name' => 'Manzoor Hussain Chandio', 'phone' => ''],
+                    ],
+                ],
+                [
+                    'name' => 'Tehsil Johi',
+                    'urdu_name' => 'تحصیل جوہی',
+                    'tagline' => 'Kachho Foothills & Dedicated Community Organizing',
+                    'description' => 'Dedicated to empowering the rural and Kachho communities, ensuring water rights, and uplifting rural families across Johi.',
+                    'members' => [
+                        ['role' => 'President', 'name' => 'Mir Ahmed Khan Babar', 'phone' => ''],
+                        ['role' => 'General Secretary', 'name' => 'Syed Mazhar Ali Shah', 'phone' => ''],
+                        ['role' => 'Senior Vice President', 'name' => 'Sikandar Ali Rodnani', 'phone' => ''],
+                        ['role' => 'Information Secretary', 'name' => 'Ali Murad Rind', 'phone' => ''],
+                        ['role' => 'Finance Secretary', 'name' => 'Akhtar Hussain Jamali', 'phone' => ''],
+                    ],
+                ],
+            ]), 'group' => 'page_tehsil_bodies', 'type' => 'json'],
+            ['key' => 'tehsil_bodies.priorities', 'value' => json_encode([
+                ['title' => 'Grassroots Mobilization', 'description' => 'Maintaining direct contact with workers and families across every village and ward.', 'icon' => 'fa-people-group'],
+                ['title' => 'Public Grievance Redressal', 'description' => 'Acting as the bridge between citizens and public administration to solve local problems.', 'icon' => 'fa-bullhorn'],
+                ['title' => 'Community Development', 'description' => 'Overseeing drinking water, rural education, health facilities and public infrastructure.', 'icon' => 'fa-chart-line'],
+                ['title' => 'Social Justice & Democracy', 'description' => 'Upholding Quaid-e-Awam and Shaheed Mohtarma Benazir Bhutto’s vision for equal rights and progress.', 'icon' => 'fa-scale-balanced'],
+            ]), 'group' => 'page_tehsil_bodies', 'type' => 'json'],
 
             // Union Councils Page
             ['key' => 'union_councils.title', 'value' => 'Union Council Bodies & Members', 'group' => 'page_union_councils', 'type' => 'text'],

@@ -84,6 +84,12 @@
                     </a>
                 </li>
                 <li class="admin-nav-item">
+                    <a href="{{ route('admin.pages.tehsil-bodies') }}" class="admin-nav-link {{ request()->routeIs('admin.pages.tehsil-bodies') ? 'active' : '' }}">
+                        <i class="fa-solid fa-landmark"></i>
+                        <span>Tehsil Bodies</span>
+                    </a>
+                </li>
+                <li class="admin-nav-item">
                     <a href="{{ route('admin.pages.municipal-bodies') }}" class="admin-nav-link {{ request()->routeIs('admin.pages.municipal-bodies') ? 'active' : '' }}">
                         <i class="fa-solid fa-city"></i>
                         <span>Municipal Bodies</span>
@@ -214,6 +220,7 @@
     </div>
 
     <script src="{{ asset('Assets/js/jquery.min.js') }}"></script>
+    <script>window.$ = window.jQuery;</script>
     <script src="{{ asset('Assets/js/bootstrap.bundle.min.js') }}"></script>
     <script>
         $(function () {

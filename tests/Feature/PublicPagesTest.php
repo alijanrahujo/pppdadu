@@ -20,6 +20,7 @@ class PublicPagesTest extends TestCase
             'pages.president' => 'Barrister Pir Mujeeb-ul-Haq',
             'pages.general-secretary' => 'Syed Naveed Ahmed Shah',
             'pages.district-body' => 'Haji Abdul Rehman',
+            'pages.tehsil-bodies' => 'Tehsil Dadu',
             'pages.municipal-bodies' => 'Local Representatives',
             'pages.union-council-bodies' => 'Haji Ghulam Murtaza',
             'pages.media-gallery' => 'Media Gallery',
@@ -64,6 +65,16 @@ class PublicPagesTest extends TestCase
                     ->assertSee('100+', false)
                     ->assertSee('10k+', false)
                     ->assertSee('bdb31113-7f3c-41d4-8673-11cdb7bacf93.png');
+            }
+
+            if ($routeName === 'pages.tehsil-bodies') {
+                $page->assertSee('Tehsil Dadu')
+                    ->assertSee('Tehsil Mehar')
+                    ->assertSee('Tehsil Khairpur Nathan Shah')
+                    ->assertSee('Tehsil Johi')
+                    ->assertSee('tehsil-bodies-statistics', false)
+                    ->assertSee('tehsil-bodies-priorities', false)
+                    ->assertSee('tehsil-bodies-impact', false);
             }
 
             if ($routeName === 'pages.municipal-bodies') {

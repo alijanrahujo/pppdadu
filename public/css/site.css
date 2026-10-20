@@ -5490,6 +5490,7 @@ textarea.form-control {
 .home-join-inner,
 .president-page-main>.container,
 .district-body-page,
+.tehsil-bodies-page,
 .union-councils-page,
 .municipal-bodies-page,
 .membership-page-main>.container,
@@ -5569,6 +5570,7 @@ main .eyebrow {
     .home-join-inner,
     .president-page-main>.container,
     .district-body-page,
+    .tehsil-bodies-page,
     .union-councils-page,
     .municipal-bodies-page,
     .membership-page-main>.container,
@@ -6329,3 +6331,594 @@ select.membership-control {
     background: #ecfdf5;
     border-color: #a7f3d0;
 }
+
+/* ==========================================================================
+   Tehsil Bodies Page
+   ========================================================================== */
+.tehsil-bodies-page {
+    width: min(100%, 1120px);
+    margin: 0 auto;
+    padding: 10px 0 20px;
+}
+
+.tehsil-bodies-heading {
+    margin: 0 auto 28px;
+    text-align: center;
+}
+
+.tehsil-bodies-heading h1 {
+    margin: 0 0 12px;
+    color: #1a1a1a;
+    font-size: clamp(24px, 3.2vw, 32px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.tehsil-bodies-heading h1 span {
+    color: #e21d25;
+}
+
+.tehsil-bodies-desc {
+    max-width: 820px;
+    margin: 0 auto;
+    color: #4b5563;
+    font-size: 14.5px;
+    line-height: 1.65;
+}
+
+.tehsil-bodies-desc p {
+    margin-bottom: 10px;
+}
+
+.tehsil-bodies-desc p:last-child {
+    margin-bottom: 0;
+}
+
+/* Statistics Strip */
+.tehsil-bodies-statistics {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin-bottom: 34px;
+    padding: 10px 6px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.06);
+}
+
+.tehsil-bodies-stat {
+    display: flex;
+    min-height: 98px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px 6px;
+    border-right: 1px solid #f1f5f9;
+    text-align: center;
+}
+
+.tehsil-bodies-stat:last-child {
+    border-right: 0;
+}
+
+.tehsil-bodies-stat-icon {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    margin-bottom: 4px;
+    place-items: center;
+    border-radius: 50%;
+    background: #ecfdf5;
+    color: #0b603d;
+    font-size: 16px;
+}
+
+.tehsil-bodies-stat-icon-red {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.tehsil-bodies-stat-icon-green {
+    background: #ecfdf5;
+    color: #0b603d;
+}
+
+.tehsil-bodies-stat strong {
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.tehsil-bodies-stat-label {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+/* Tehsil Cards */
+.tehsils-showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    margin-bottom: 44px;
+}
+
+.tehsil-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 24px 26px;
+    box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.05);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.tehsil-card:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
+}
+
+.tehsil-card-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.tehsil-header-left {
+    flex: 1 1 500px;
+}
+
+.tehsil-header-photo-wrap {
+    flex-shrink: 0;
+}
+
+.tehsil-header-photo {
+    width: 200px;
+    height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.tehsil-title-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tehsil-icon-badge {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #0b603d, #148053);
+    color: #ffffff;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.tehsil-title-group h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.tehsil-urdu-tag {
+    display: inline-block;
+    margin-top: 2px;
+    padding: 2px 8px;
+    background: #f1f5f9;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0b603d;
+    direction: rtl;
+}
+
+.tehsil-tagline {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+    background: #f8fafc;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+}
+
+.tehsil-description {
+    margin: 12px 0 0;
+    font-size: 14px;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.tehsil-members-section {
+    margin-top: 18px;
+}
+
+.tehsil-members-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.tehsil-section-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #0b603d;
+}
+
+.tehsil-members-count {
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   Redesigned Leader Portrait Image Cards
+   ========================================================================== */
+.tehsil-leader-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.tehsil-leader-card {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.05);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s ease;
+    text-align: center;
+    height: 100%;
+}
+
+.tehsil-leader-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 28px -4px rgba(0, 0, 0, 0.12);
+    border-color: #0b603d;
+}
+
+.tehsil-leader-card.card-highlight-president {
+    border-top: 3px solid #dc2626;
+}
+
+.tehsil-leader-card.card-highlight-gs {
+    border-top: 3px solid #0b603d;
+}
+
+.tehsil-leader-image-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1.08;
+    overflow: hidden;
+    background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.tehsil-leader-image-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(15, 23, 42, 0.75) 100%);
+    pointer-events: none;
+}
+
+.tehsil-leader-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 22%;
+    transition: transform 0.35s ease;
+}
+
+.tehsil-leader-card:hover .tehsil-leader-img {
+    transform: scale(1.06);
+}
+
+.tehsil-leader-role-tag {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    z-index: 2;
+    padding: 4px 6px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1.25;
+    text-align: center;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tehsil-leader-role-tag.badge-president {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: #ffffff;
+}
+
+.tehsil-leader-role-tag.badge-gs {
+    background: linear-gradient(135deg, #0b603d, #047857);
+    color: #ffffff;
+}
+
+.tehsil-leader-role-tag.badge-svp {
+    background: linear-gradient(135deg, #b45309, #d97706);
+    color: #ffffff;
+}
+
+.tehsil-leader-role-tag.badge-info {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    color: #ffffff;
+}
+
+.tehsil-leader-role-tag.badge-finance {
+    background: linear-gradient(135deg, #0f766e, #0d9488);
+    color: #ffffff;
+}
+
+.tehsil-leader-role-tag.badge-default {
+    background: rgba(15, 23, 42, 0.88);
+    color: #ffffff;
+}
+
+.tehsil-leader-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 13px 12px 14px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.tehsil-leader-name {
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.35;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 38px;
+}
+
+.tehsil-leader-division {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.tehsil-leader-phone {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #0b603d;
+    background: #ecfdf5;
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-decoration: none;
+    border: 1px solid #a7f3d0;
+    transition: all 0.15s ease;
+}
+
+.tehsil-leader-phone:hover {
+    background: #0b603d;
+    color: #ffffff;
+    border-color: #0b603d;
+}
+
+/* Priorities */
+.tehsil-bodies-priorities {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.tehsil-bodies-priorities header {
+    margin-bottom: 22px;
+}
+
+.tehsil-bodies-priorities h2 {
+    margin: 0 0 6px;
+    font-size: clamp(20px, 2.6vw, 26px);
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.tehsil-bodies-priorities h2 span {
+    color: #dc2626;
+}
+
+.tehsil-bodies-priorities header p {
+    max-width: 680px;
+    margin: 0 auto;
+    font-size: 13.5px;
+    color: #64748b;
+}
+
+.tehsil-priority-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.tehsil-priority-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 22px 16px;
+    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.04);
+    text-align: center;
+}
+
+.tehsil-priority-card>span {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    background: #ecfdf5;
+    color: #0b603d;
+    font-size: 18px;
+}
+
+.tehsil-priority-card:nth-child(even)>span {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.tehsil-priority-card h3 {
+    margin: 0 0 6px;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.tehsil-priority-card p {
+    margin: 0;
+    font-size: 12.5px;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+/* Impact CTA */
+.tehsil-bodies-impact {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 24px;
+    border-radius: 14px;
+    background: linear-gradient(105deg, #0f172a, #0b603d 85%);
+    color: #ffffff;
+    box-shadow: 0 8px 24px -4px rgba(11, 96, 61, 0.3);
+}
+
+.tehsil-bodies-impact-icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 22px;
+}
+
+.tehsil-bodies-impact-copy h2 {
+    margin: 0 0 4px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.tehsil-bodies-impact-copy p {
+    margin: 0;
+    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.tehsil-bodies-impact-action {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 1199.98px) {
+    .tehsil-leader-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .tehsil-bodies-statistics {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        row-gap: 8px;
+    }
+    .tehsil-bodies-stat:nth-child(3) {
+        border-right: 0;
+    }
+    .tehsil-priority-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tehsil-bodies-impact {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 14px;
+    }
+    .tehsil-bodies-impact-icon {
+        margin: 0 auto;
+    }
+    .tehsil-bodies-impact-action {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .tehsil-leader-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+    .tehsil-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .tehsil-header-photo {
+        width: 100%;
+        height: 140px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .tehsil-bodies-statistics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tehsil-bodies-stat:nth-child(2n) {
+        border-right: 0;
+    }
+    .tehsil-leader-card {
+        border-radius: 10px;
+    }
+    .tehsil-leader-info {
+        padding: 10px 8px 12px;
+    }
+    .tehsil-leader-name {
+        font-size: 13px;
+        min-height: 34px;
+    }
+    .tehsil-priority-grid {
+        grid-template-columns: 1fr;
+    }
+}

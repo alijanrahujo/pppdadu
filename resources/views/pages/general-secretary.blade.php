@@ -3,23 +3,27 @@
         <div class="president-intro-copy">
             <h1>About Our <span>General Secretary</span></h1>
             <h2>{{ $page['subtitle'] }}</h2>
-            <p class="president-role">General Secretary</p>
+            <p class="president-role">{{ $page['role'] ?? 'General Secretary' }}</p>
             <p class="president-party">Pakistan Peoples Party, District Dadu</p>
-            <p>Syed Naveed Ahmed Shah is a committed party leader and an energetic organizer who works day and night for the strengthening of PPP in District Dadu.</p>
-            <p>He believes in teamwork, dedication and discipline and is focused on bringing the party vision to every corner of the district.</p>
+            
+            {!! $page['description'] !!}
 
             <div class="president-principles">
-                @foreach ([
-                    ['title' => 'Strong Leadership', 'description' => 'Leading the team with vision, integrity and dedication.', 'icon' => 'fa-people-group'],
-                    ['title' => 'Party Organization', 'description' => 'Strengthening the party structure at all levels across the district.', 'icon' => 'fa-handshake-angle'],
-                    ['title' => 'Public Service', 'description' => 'Always ready to serve the people and address their issues.', 'icon' => 'fa-bullhorn'],
-                    ['title' => 'Youth Empowerment', 'description' => 'Working for the political awareness and empowerment of youth.', 'icon' => 'fa-chart-line'],
-                ] as $principle)
+                @php
+                    $principleIcons = ['fa-people-group', 'fa-handshake-angle', 'fa-bullhorn', 'fa-chart-line'];
+                    $principleDescs = [
+                        'Leading the team with vision, integrity and dedication.',
+                        'Strengthening the party structure at all levels across the district.',
+                        'Always ready to serve the people and address their issues.',
+                        'Working for the political awareness and empowerment of youth.'
+                    ];
+                @endphp
+                @foreach ($page['principles'] as $index => $principle)
                     <article class="president-principle">
-                        <span><i class="fa-solid {{ $principle['icon'] }}" aria-hidden="true"></i></span>
+                        <span><i class="fa-solid {{ is_array($principle) ? ($principle['icon'] ?? ($principleIcons[$index] ?? 'fa-check')) : ($principleIcons[$index] ?? 'fa-check') }}" aria-hidden="true"></i></span>
                         <div>
-                            <h3>{{ $principle['title'] }}</h3>
-                            <p>{{ $principle['description'] }}</p>
+                            <h3>{{ is_array($principle) ? ($principle['title'] ?? '') : $principle }}</h3>
+                            <p>{{ is_array($principle) ? ($principle['description'] ?? '') : ($principleDescs[$index] ?? '') }}</p>
                         </div>
                     </article>
                 @endforeach
@@ -34,9 +38,7 @@
         <blockquote class="president-quote">
             <span class="quote-mark" aria-hidden="true">&rdquo;</span>
             <div>
-                <p>“{{ $page['quote'] }}”</p>
-                <cite>- Syed Naveed Ahmed Shah</cite>
-                <span>General Secretary, PPP District Dadu</span>
+                {!! $page['statement'] ?? ('<p>“' . e($page['quote']) . '”</p><cite>- ' . e($page['subtitle']) . '</cite><span>General Secretary, PPP District Dadu</span>') !!}
             </div>
         </blockquote>
         <div class="president-statistics">
