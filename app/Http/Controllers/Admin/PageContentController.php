@@ -210,11 +210,13 @@ class PageContentController extends Controller
             'tehsils.*.tagline' => ['nullable', 'string', 'max:255'],
             'tehsils.*.description' => ['nullable', 'string'],
             'tehsils.*.image' => ['nullable', 'string', 'max:255'],
+            'tehsils.*.image_file' => ['nullable', 'image', 'max:5120'],
             'tehsils.*.members' => ['nullable', 'array'],
             'tehsils.*.members.*.name' => ['required', 'string', 'max:150'],
             'tehsils.*.members.*.role' => ['required', 'string', 'max:150'],
             'tehsils.*.members.*.phone' => ['nullable', 'string', 'max:50'],
             'tehsils.*.members.*.image' => ['nullable', 'string', 'max:255'],
+            'tehsils.*.members.*.image_file' => ['nullable', 'image', 'max:5120'],
             'priorities' => ['nullable', 'array'],
             'priorities.*.title' => ['required', 'string', 'max:150'],
             'priorities.*.description' => ['required', 'string'],
@@ -231,15 +233,42 @@ class PageContentController extends Controller
         }
 
         if (isset($validated['tehsils'])) {
-            $tehsils = array_values($validated['tehsils']);
-            foreach ($tehsils as &$tehsil) {
-                if (isset($tehsil['members']) && is_array($tehsil['members'])) {
-                    $tehsil['members'] = array_values($tehsil['members']);
-                } else {
-                    $tehsil['members'] = [];
+            $processedTehsils = [];
+            foreach ($validated['tehsils'] as $tIndex => $tehsilData) {
+                $tehsilItem = [
+                    'name' => $tehsilData['name'],
+                    'urdu_name' => $tehsilData['urdu_name'] ?? null,
+                    'tagline' => $tehsilData['tagline'] ?? null,
+                    'description' => $tehsilData['description'] ?? null,
+                    'image' => ! empty($tehsilData['image']) ? $tehsilData['image'] : null,
+                    'members' => [],
+                ];
+
+                if ($request->hasFile("tehsils.{$tIndex}.image_file")) {
+                    $tehsilItem['image'] = $request->file("tehsils.{$tIndex}.image_file")->store('uploads/tehsils', 'public');
                 }
+
+                if (isset($tehsilData['members']) && is_array($tehsilData['members'])) {
+                    foreach ($tehsilData['members'] as $mIndex => $memberData) {
+                        $memberItem = [
+                            'name' => $memberData['name'],
+                            'role' => $memberData['role'],
+                            'phone' => $memberData['phone'] ?? null,
+                            'image' => ! empty($memberData['image']) ? $memberData['image'] : null,
+                        ];
+
+                        if ($request->hasFile("tehsils.{$tIndex}.members.{$mIndex}.image_file")) {
+                            $memberItem['image'] = $request->file("tehsils.{$tIndex}.members.{$mIndex}.image_file")->store('uploads/tehsil-members', 'public');
+                        }
+
+                        $tehsilItem['members'][] = $memberItem;
+                    }
+                }
+
+                $processedTehsils[] = $tehsilItem;
             }
-            SiteSetting::set('tehsil_bodies.tehsils', $tehsils, 'page_tehsil_bodies', 'json');
+
+            SiteSetting::set('tehsil_bodies.tehsils', $processedTehsils, 'page_tehsil_bodies', 'json');
         }
 
         if (isset($validated['priorities'])) {

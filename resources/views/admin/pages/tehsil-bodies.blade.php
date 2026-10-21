@@ -75,7 +75,7 @@
 @section('content')
 <div class="row justify-content-center">
     <div class="col-lg-10">
-        <form action="{{ route('admin.pages.tehsil-bodies.update') }}" method="POST">
+        <form action="{{ route('admin.pages.tehsil-bodies.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <!-- Header & Overview Text -->
@@ -130,13 +130,13 @@
                 <div class="admin-card-body">
                     <div id="statsContainer" class="admin-repeater-list">
                         @php
-                            $statistics = $settings['tehsil_bodies.statistics'] ?? [
+                            $statistics = old('statistics', $settings['tehsil_bodies.statistics'] ?? [
                                 ['value' => '4', 'label' => 'Tehsils / Talukas', 'icon' => 'fa-landmark', 'color' => 'red'],
                                 ['value' => '52+', 'label' => 'Union Councils', 'icon' => 'fa-people-roof', 'color' => 'green'],
                                 ['value' => '100+', 'label' => 'Office Bearers', 'icon' => 'fa-user-group', 'color' => 'red'],
                                 ['value' => '250+', 'label' => 'Ward & Village Units', 'icon' => 'fa-location-dot', 'color' => 'green'],
                                 ['value' => '50k+', 'label' => 'Active Workers & Supporters', 'icon' => 'fa-users', 'color' => 'red'],
-                            ];
+                            ]);
                         @endphp
                         @foreach ($statistics as $index => $stat)
                             <div class="admin-repeater-item">
@@ -175,7 +175,7 @@
                 <div class="admin-card-header d-flex justify-content-between align-items-center">
                     <div>
                         <h2 class="admin-card-title"><i class="fa-solid fa-sitemap"></i> Tehsil Bodies &amp; Office Bearers</h2>
-                        <div class="admin-card-subtitle">Manage each Tehsil organization and its office bearers</div>
+                        <div class="admin-card-subtitle">Manage each Tehsil organization and upload photos for office bearers</div>
                     </div>
                     <button type="button" class="btn btn-sm btn-outline-success" id="addTehsilBtn">
                         <i class="fa-solid fa-plus me-1"></i> Add Another Tehsil
@@ -190,12 +190,13 @@
                                     'urdu_name' => 'تحصیل دادو',
                                     'tagline' => 'District Headquarters & Central Hub',
                                     'description' => 'Covering Dadu city and surrounding rural union councils with active party leadership dedicated to public welfare and infrastructure.',
+                                    'image' => 'Assets/images/images.jpg',
                                     'members' => [
-                                        ['role' => 'President', 'name' => 'Syed Zafar Ali Shah', 'phone' => '025-4551234'],
-                                        ['role' => 'General Secretary', 'name' => 'Muhammad Aslam Panhwar', 'phone' => ''],
-                                        ['role' => 'Senior Vice President', 'name' => 'Haji Ghulam Rasool Solangi', 'phone' => ''],
-                                        ['role' => 'Information Secretary', 'name' => 'Liaquat Ali Jamali', 'phone' => ''],
-                                        ['role' => 'Finance Secretary', 'name' => 'Tariq Hussain Memon', 'phone' => ''],
+                                        ['role' => 'President', 'name' => 'Syed Zafar Ali Shah', 'phone' => '025-4551234', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                                        ['role' => 'General Secretary', 'name' => 'Muhammad Aslam Panhwar', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                                        ['role' => 'Senior Vice President', 'name' => 'Haji Ghulam Rasool Solangi', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                                        ['role' => 'Information Secretary', 'name' => 'Liaquat Ali Jamali', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                                        ['role' => 'Finance Secretary', 'name' => 'Tariq Hussain Memon', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
                                     ],
                                 ],
                                 [
@@ -203,12 +204,13 @@
                                     'urdu_name' => 'تحصیل میہڑ',
                                     'tagline' => 'Agricultural Heart & Vibrant Grassroots Network',
                                     'description' => 'Mobilizing agricultural workers, youth activists and rural families across the fertile taluka of Mehar.',
+                                    'image' => 'Assets/images/images-4.jpg',
                                     'members' => [
-                                        ['role' => 'President', 'name' => 'Sardar Ghulam Mustafa Mahisar', 'phone' => ''],
-                                        ['role' => 'General Secretary', 'name' => 'Aijaz Ahmed Chandio', 'phone' => ''],
-                                        ['role' => 'Senior Vice President', 'name' => 'Ali Nawaz Siyal', 'phone' => ''],
-                                        ['role' => 'Information Secretary', 'name' => 'Kareem Bux Soomro', 'phone' => ''],
-                                        ['role' => 'Finance Secretary', 'name' => 'Muhammad Ramzan Khoso', 'phone' => ''],
+                                        ['role' => 'President', 'name' => 'Sardar Ghulam Mustafa Mahisar', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                                        ['role' => 'General Secretary', 'name' => 'Aijaz Ahmed Chandio', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                                        ['role' => 'Senior Vice President', 'name' => 'Ali Nawaz Siyal', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                                        ['role' => 'Information Secretary', 'name' => 'Kareem Bux Soomro', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                                        ['role' => 'Finance Secretary', 'name' => 'Muhammad Ramzan Khoso', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
                                     ],
                                 ],
                                 [
@@ -216,12 +218,13 @@
                                     'urdu_name' => 'تحصیل خیرپور ناتھن شاہ',
                                     'tagline' => 'Resilient Leadership & People-First Public Service',
                                     'description' => 'Leading community rehabilitation, public health, clean water initiatives, and local party organizing throughout K.N. Shah.',
+                                    'image' => 'Assets/images/images-2.jpg',
                                     'members' => [
-                                        ['role' => 'President', 'name' => 'Mir Ghulam Shabbir Lund', 'phone' => ''],
-                                        ['role' => 'General Secretary', 'name' => 'Nadeem Ahmed Kalhoro', 'phone' => ''],
-                                        ['role' => 'Senior Vice President', 'name' => 'Ghulam Abbas Leghari', 'phone' => ''],
-                                        ['role' => 'Information Secretary', 'name' => 'Barkat Ali Bughio', 'phone' => ''],
-                                        ['role' => 'Finance Secretary', 'name' => 'Manzoor Hussain Chandio', 'phone' => ''],
+                                        ['role' => 'President', 'name' => 'Mir Ghulam Shabbir Lund', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                                        ['role' => 'General Secretary', 'name' => 'Nadeem Ahmed Kalhoro', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                                        ['role' => 'Senior Vice President', 'name' => 'Ghulam Abbas Leghari', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                                        ['role' => 'Information Secretary', 'name' => 'Barkat Ali Bughio', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                                        ['role' => 'Finance Secretary', 'name' => 'Manzoor Hussain Chandio', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
                                     ],
                                 ],
                                 [
@@ -229,16 +232,17 @@
                                     'urdu_name' => 'تحصیل جوہی',
                                     'tagline' => 'Kachho Foothills & Dedicated Community Organizing',
                                     'description' => 'Dedicated to empowering the rural and Kachho communities, ensuring water rights, and uplifting rural families across Johi.',
+                                    'image' => 'Assets/images/images-3.jpg',
                                     'members' => [
-                                        ['role' => 'President', 'name' => 'Mir Ahmed Khan Babar', 'phone' => ''],
-                                        ['role' => 'General Secretary', 'name' => 'Syed Mazhar Ali Shah', 'phone' => ''],
-                                        ['role' => 'Senior Vice President', 'name' => 'Sikandar Ali Rodnani', 'phone' => ''],
-                                        ['role' => 'Information Secretary', 'name' => 'Ali Murad Rind', 'phone' => ''],
-                                        ['role' => 'Finance Secretary', 'name' => 'Akhtar Hussain Jamali', 'phone' => ''],
+                                        ['role' => 'President', 'name' => 'Mir Ahmed Khan Babar', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                                        ['role' => 'General Secretary', 'name' => 'Syed Mazhar Ali Shah', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                                        ['role' => 'Senior Vice President', 'name' => 'Sikandar Ali Rodnani', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                                        ['role' => 'Information Secretary', 'name' => 'Ali Murad Rind', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
+                                        ['role' => 'Finance Secretary', 'name' => 'Akhtar Hussain Jamali', 'phone' => '', 'image' => 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png'],
                                     ],
                                 ],
                             ];
-                            $tehsils = $settings['tehsil_bodies.tehsils'] ?? $defaultTehsils;
+                            $tehsils = old('tehsils', $settings['tehsil_bodies.tehsils'] ?? $defaultTehsils);
                         @endphp
 
                         @foreach ($tehsils as $tIndex => $tehsil)
@@ -264,8 +268,33 @@
                                         <input type="text" name="tehsils[{{ $tIndex }}][tagline]" class="admin-input" value="{{ $tehsil['tagline'] ?? '' }}" placeholder="e.g. District Headquarters">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="admin-label">Tehsil Photo / Landmark Image (Optional)</label>
-                                        <input type="text" name="tehsils[{{ $tIndex }}][image]" class="admin-input" value="{{ $tehsil['image'] ?? '' }}" placeholder="e.g. Assets/images/images-3.jpg">
+                                        <label class="admin-label">Tehsil Photo / Landmark Image</label>
+                                        <div class="d-flex align-items-center gap-2 p-1 bg-white rounded border">
+                                            <div style="width: 48px; height: 38px; border-radius: 4px; overflow: hidden; flex-shrink: 0; background: #eaedf0; border: 1px solid #cbd5e1;">
+                                                <img src="{{ !empty($tehsil['image']) ? media_asset($tehsil['image']) : asset('Assets/images/images-3.jpg') }}" 
+                                                     id="tehsil_preview_{{ $tIndex }}" 
+                                                     data-default="{{ asset('Assets/images/images-3.jpg') }}"
+                                                     style="width: 100%; height: 100%; object-fit: cover;"
+                                                     alt="Tehsil Photo">
+                                            </div>
+                                            <div class="input-group input-group-sm flex-grow-1">
+                                                <input type="file" 
+                                                       name="tehsils[{{ $tIndex }}][image_file]" 
+                                                       class="form-control form-control-sm tehsil-file-input" 
+                                                       accept="image/*" 
+                                                       data-preview="#tehsil_preview_{{ $tIndex }}"
+                                                       title="Upload Tehsil Landmark Image">
+                                                <input type="hidden" 
+                                                       name="tehsils[{{ $tIndex }}][image]" 
+                                                       class="tehsil-image-path" 
+                                                       value="{{ $tehsil['image'] ?? '' }}">
+                                                <button type="button" 
+                                                        class="btn btn-outline-danger btn-sm clear-photo-btn {{ empty($tehsil['image']) ? 'd-none' : '' }}" 
+                                                        title="Remove photo">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="admin-label">Overview Description</label>
@@ -285,7 +314,7 @@
                                         @foreach ($tehsil['members'] ?? [] as $mIndex => $member)
                                             <div class="tehsil-member-row">
                                                 <div class="flex-grow-1">
-                                                    <div class="row g-2">
+                                                    <div class="row g-2 align-items-center">
                                                         <div class="col-md-3">
                                                             <input type="text" name="tehsils[{{ $tIndex }}][members][{{ $mIndex }}][role]" class="admin-input form-control-sm" value="{{ $member['role'] ?? '' }}" required placeholder="Role (e.g. President)">
                                                         </div>
@@ -296,7 +325,32 @@
                                                             <input type="text" name="tehsils[{{ $tIndex }}][members][{{ $mIndex }}][phone]" class="admin-input form-control-sm" value="{{ $member['phone'] ?? '' }}" placeholder="Phone (Optional)">
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <input type="text" name="tehsils[{{ $tIndex }}][members][{{ $mIndex }}][image]" class="admin-input form-control-sm" value="{{ $member['image'] ?? '' }}" placeholder="Photo URL/Path (Optional)">
+                                                            <div class="d-flex align-items-center gap-1">
+                                                                <div class="member-avatar-wrap" style="width: 31px; height: 31px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: #e2e8f0; border: 1px solid #cbd5e1;" title="Photo Preview">
+                                                                    <img src="{{ media_asset($member['image'] ?? null, 'Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png') }}"
+                                                                         id="member_preview_{{ $tIndex }}_{{ $mIndex }}"
+                                                                         data-default="{{ asset('Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png') }}"
+                                                                         style="width: 100%; height: 100%; object-fit: cover;"
+                                                                         alt="Photo">
+                                                                </div>
+                                                                <div class="input-group input-group-sm flex-grow-1">
+                                                                    <input type="file" 
+                                                                           name="tehsils[{{ $tIndex }}][members][{{ $mIndex }}][image_file]" 
+                                                                           class="form-control form-control-sm member-file-input" 
+                                                                           accept="image/*" 
+                                                                           data-preview="#member_preview_{{ $tIndex }}_{{ $mIndex }}"
+                                                                           title="Upload Photo">
+                                                                    <input type="hidden" 
+                                                                           name="tehsils[{{ $tIndex }}][members][{{ $mIndex }}][image]" 
+                                                                           class="member-image-path" 
+                                                                           value="{{ $member['image'] ?? '' }}">
+                                                                    <button type="button" 
+                                                                            class="btn btn-outline-danger btn-sm clear-photo-btn {{ empty($member['image']) ? 'd-none' : '' }}" 
+                                                                            title="Remove photo">
+                                                                        <i class="fa-solid fa-xmark"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -327,12 +381,12 @@
                 <div class="admin-card-body">
                     <div id="prioritiesContainer" class="admin-repeater-list">
                         @php
-                            $priorities = $settings['tehsil_bodies.priorities'] ?? [
+                            $priorities = old('priorities', $settings['tehsil_bodies.priorities'] ?? [
                                 ['title' => 'Grassroots Mobilization', 'description' => 'Maintaining direct contact with workers and families across every village and ward.', 'icon' => 'fa-people-group'],
                                 ['title' => 'Public Grievance Redressal', 'description' => 'Acting as the bridge between citizens and public administration to solve local problems.', 'icon' => 'fa-bullhorn'],
                                 ['title' => 'Community Development', 'description' => 'Overseeing drinking water, rural education, health facilities and public infrastructure.', 'icon' => 'fa-chart-line'],
                                 ['title' => 'Social Justice & Democracy', 'description' => 'Upholding Quaid-e-Awam and Shaheed Mohtarma Benazir Bhutto’s vision for equal rights and progress.', 'icon' => 'fa-scale-balanced'],
-                            ];
+                            ]);
                         @endphp
                         @foreach ($priorities as $index => $item)
                             <div class="admin-repeater-item">
@@ -398,6 +452,41 @@
                 }
                 $el.val($el.summernote('code'));
             });
+        });
+
+        // Live preview when file is selected
+        $(document).on('change', 'input[type="file"][data-preview]', function () {
+            const input = this;
+            const previewSelector = $(input).data('preview');
+            const $preview = $(previewSelector);
+            const $container = $(input).closest('.input-group, .d-flex');
+            const $clearBtn = $container.find('.clear-photo-btn');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    $preview.attr('src', e.target.result);
+                    $clearBtn.removeClass('d-none');
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+
+        // Clear photo button
+        $(document).on('click', '.clear-photo-btn', function () {
+            const $wrap = $(this).closest('.col-md-3, .col-md-6, .tehsil-member-row');
+            const $fileInput = $wrap.find('input[type="file"][data-preview]');
+            const $hiddenInput = $wrap.find('.member-image-path, .tehsil-image-path');
+            const previewSelector = $fileInput.data('preview');
+            const $preview = $(previewSelector);
+            const defaultSrc = $preview.data('default') || '';
+
+            $fileInput.val('');
+            $hiddenInput.val('');
+            if (defaultSrc) {
+                $preview.attr('src', defaultSrc);
+            }
+            $(this).addClass('d-none');
         });
 
         // Add Statistic repeater
@@ -469,15 +558,18 @@
             $(this).closest('.tehsil-admin-box').find('.tehsil-name-display').text(val || 'Tehsil');
         });
 
+        const defaultBearerAvatar = '{{ asset("Assets/images/bdb31113-7f3c-41d4-8673-11cdb7bacf93.png") }}';
+        const defaultTehsilPhoto = '{{ asset("Assets/images/images-3.jpg") }}';
+
         // Add Bearer row to a specific Tehsil
         $(document).on('click', '.add-member-btn', function () {
             const tIndex = $(this).data('tehsil-index');
             const $list = $('#tehsilMembers_' + tIndex);
-            const mIndex = $list.find('.tehsil-member-row').length + Date.now();
+            const mIndex = Date.now();
             const rowTpl = `
                 <div class="tehsil-member-row">
                     <div class="flex-grow-1">
-                        <div class="row g-2">
+                        <div class="row g-2 align-items-center">
                             <div class="col-md-3">
                                 <input type="text" name="tehsils[${tIndex}][members][${mIndex}][role]" class="admin-input form-control-sm" required placeholder="Role (e.g. Vice President)">
                             </div>
@@ -488,7 +580,30 @@
                                 <input type="text" name="tehsils[${tIndex}][members][${mIndex}][phone]" class="admin-input form-control-sm" placeholder="Phone (Optional)">
                             </div>
                             <div class="col-md-3">
-                                <input type="text" name="tehsils[${tIndex}][members][${mIndex}][image]" class="admin-input form-control-sm" placeholder="Photo URL/Path (Optional)">
+                                <div class="d-flex align-items-center gap-1">
+                                    <div class="member-avatar-wrap" style="width: 31px; height: 31px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: #e2e8f0; border: 1px solid #cbd5e1;" title="Photo Preview">
+                                        <img src="${defaultBearerAvatar}"
+                                             id="member_preview_${tIndex}_${mIndex}"
+                                             data-default="${defaultBearerAvatar}"
+                                             style="width: 100%; height: 100%; object-fit: cover;"
+                                             alt="Photo">
+                                    </div>
+                                    <div class="input-group input-group-sm flex-grow-1">
+                                        <input type="file" 
+                                               name="tehsils[${tIndex}][members][${mIndex}][image_file]" 
+                                               class="form-control form-control-sm member-file-input" 
+                                               accept="image/*" 
+                                               data-preview="#member_preview_${tIndex}_${mIndex}"
+                                               title="Upload Photo">
+                                        <input type="hidden" 
+                                               name="tehsils[${tIndex}][members][${mIndex}][image]" 
+                                               class="member-image-path" 
+                                               value="">
+                                        <button type="button" class="btn btn-outline-danger btn-sm clear-photo-btn d-none" title="Remove photo">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -527,8 +642,30 @@
                             <input type="text" name="tehsils[${tIndex}][tagline]" class="admin-input" placeholder="e.g. Sub-division">
                         </div>
                         <div class="col-md-6">
-                            <label class="admin-label">Tehsil Photo / Landmark Image (Optional)</label>
-                            <input type="text" name="tehsils[${tIndex}][image]" class="admin-input" placeholder="e.g. Assets/images/images-3.jpg">
+                            <label class="admin-label">Tehsil Photo / Landmark Image</label>
+                            <div class="d-flex align-items-center gap-2 p-1 bg-white rounded border">
+                                <div style="width: 48px; height: 38px; border-radius: 4px; overflow: hidden; flex-shrink: 0; background: #eaedf0; border: 1px solid #cbd5e1;">
+                                    <img src="${defaultTehsilPhoto}" 
+                                         id="tehsil_preview_${tIndex}" 
+                                         data-default="${defaultTehsilPhoto}"
+                                         style="width: 100%; height: 100%; object-fit: cover;"
+                                         alt="Tehsil Photo">
+                                </div>
+                                <div class="input-group input-group-sm flex-grow-1">
+                                    <input type="file" 
+                                           name="tehsils[${tIndex}][image_file]" 
+                                           class="form-control form-control-sm tehsil-file-input" 
+                                           accept="image/*" 
+                                           data-preview="#tehsil_preview_${tIndex}">
+                                    <input type="hidden" 
+                                           name="tehsils[${tIndex}][image]" 
+                                           class="tehsil-image-path" 
+                                           value="">
+                                    <button type="button" class="btn btn-outline-danger btn-sm clear-photo-btn d-none" title="Remove photo">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <label class="admin-label">Overview Description</label>
@@ -546,7 +683,7 @@
                         <div class="tehsil-members-list" id="tehsilMembers_${tIndex}">
                             <div class="tehsil-member-row">
                                 <div class="flex-grow-1">
-                                    <div class="row g-2">
+                                    <div class="row g-2 align-items-center">
                                         <div class="col-md-3">
                                             <input type="text" name="tehsils[${tIndex}][members][0][role]" class="admin-input form-control-sm" value="President" required placeholder="Role">
                                         </div>
@@ -557,7 +694,30 @@
                                             <input type="text" name="tehsils[${tIndex}][members][0][phone]" class="admin-input form-control-sm" placeholder="Phone (Optional)">
                                         </div>
                                         <div class="col-md-3">
-                                            <input type="text" name="tehsils[${tIndex}][members][0][image]" class="admin-input form-control-sm" placeholder="Photo URL/Path (Optional)">
+                                            <div class="d-flex align-items-center gap-1">
+                                                <div class="member-avatar-wrap" style="width: 31px; height: 31px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: #e2e8f0; border: 1px solid #cbd5e1;" title="Photo Preview">
+                                                    <img src="${defaultBearerAvatar}"
+                                                         id="member_preview_${tIndex}_0"
+                                                         data-default="${defaultBearerAvatar}"
+                                                         style="width: 100%; height: 100%; object-fit: cover;"
+                                                         alt="Photo">
+                                                </div>
+                                                <div class="input-group input-group-sm flex-grow-1">
+                                                    <input type="file" 
+                                                           name="tehsils[${tIndex}][members][0][image_file]" 
+                                                           class="form-control form-control-sm member-file-input" 
+                                                           accept="image/*" 
+                                                           data-preview="#member_preview_${tIndex}_0"
+                                                           title="Upload Photo">
+                                                    <input type="hidden" 
+                                                           name="tehsils[${tIndex}][members][0][image]" 
+                                                           class="member-image-path" 
+                                                           value="">
+                                                    <button type="button" class="btn btn-outline-danger btn-sm clear-photo-btn d-none" title="Remove photo">
+                                                        <i class="fa-solid fa-xmark"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
