@@ -261,5 +261,105 @@
                 districtSelect.addEventListener('change', updateTehsils);
             }
         }
+
+        // ==========================================================================
+        // PWA (Progressive Web App) Service Worker & App Installation Logic
+        // ==========================================================================
+        const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function (registration) {
+                        console.log('PPP Dadu PWA: ServiceWorker registered with scope:', registration.scope);
+                    })
+                    .catch(function (error) {
+                        console.warn('PPP Dadu PWA: ServiceWorker registration failed:', error);
+                    });
+            });
+        }
+
+        // Capture Android / Chromium install prompt
+        let deferredPrompt = null;
+        window.addEventListener('beforeinstallprompt', function (e) {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        // Hide install button in masthead if already installed in standalone mode
+        if (isStandalone) {
+            $('.masthead-app-install-btn').hide();
+        }
+
+        // Open PWA Modal on any trigger
+        $('.pwa-trigger-btn').on('click', function (e) {
+            e.preventDefault();
+            const pwaModalEl = document.getElementById('pwaModal');
+            if (pwaModalEl && window.bootstrap && window.bootstrap.Modal) {
+                const modal = bootstrap.Modal.getOrCreateInstance(pwaModalEl);
+                
+                // Auto select iOS tab if on iPhone/iPad
+                if (isIos) {
+                    $('#pwaIosTab').addClass('active');
+                    $('#pwaAndroidTab').removeClass('active');
+                    $('#pwaIosPanel').removeClass('d-none');
+                    $('#pwaAndroidPanel').addClass('d-none');
+                } else {
+                    $('#pwaAndroidTab').addClass('active');
+                    $('#pwaIosTab').removeClass('active');
+                    $('#pwaAndroidPanel').removeClass('d-none');
+                    $('#pwaIosPanel').addClass('d-none');
+                }
+
+                modal.show();
+            }
+        });
+
+        // Platform Tab Switching
+        $('#pwaAndroidTab').on('click', function () {
+            $(this).addClass('active');
+            $('#pwaIosTab').removeClass('active');
+            $('#pwaAndroidPanel').removeClass('d-none');
+            $('#pwaIosPanel').addClass('d-none');
+        });
+
+        $('#pwaIosTab').on('click', function () {
+            $(this).addClass('active');
+            $('#pwaAndroidTab').removeClass('active');
+            $('#pwaIosPanel').removeClass('d-none');
+            $('#pwaAndroidPanel').addClass('d-none');
+        });
+
+        // Native Install Button inside Modal
+        $('#pwaNativeInstallBtn').on('click', async function () {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const choice = await deferredPrompt.userChoice;
+                if (choice.outcome === 'accepted') {
+                    console.log('User installed the PPP Dadu app');
+                    const modalEl = document.getElementById('pwaModal');
+                    if (modalEl && window.bootstrap && window.bootstrap.Modal) {
+                        bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+                    }
+                }
+                deferredPrompt = null;
+            } else if (isIos) {
+                // Open modal and show iOS tab
+                const pwaModalEl = document.getElementById('pwaModal');
+                if (pwaModalEl && window.bootstrap && window.bootstrap.Modal) {
+                    $('#pwaIosTab').trigger('click');
+                    bootstrap.Modal.getOrCreateInstance(pwaModalEl).show();
+                }
+            } else {
+                // If not triggered via beforeinstallprompt, open modal to guide the user
+                const pwaModalEl = document.getElementById('pwaModal');
+                if (pwaModalEl && window.bootstrap && window.bootstrap.Modal) {
+                    bootstrap.Modal.getOrCreateInstance(pwaModalEl).show();
+                }
+            }
+        });
     });
 })(window.jQuery);
+

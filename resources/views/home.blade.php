@@ -193,14 +193,100 @@
         </section>
     @endif
 
+    <!-- Latest Blogs & News Carousel -->
+    @if (isset($blogSlides) && $blogSlides->isNotEmpty())
+        <section class="home-blogs-carousel-section" id="blogs-news" aria-label="Latest News and Blog Stories">
+            <div class="home-section-inner">
+                <div class="d-flex flex-wrap justify-content-between align-items-end mb-4">
+                    <div>
+                        <div class="home-section-kicker">Latest Updates</div>
+                        <h2 class="home-blogs-carousel-title">News, Statements &amp; Stories</h2>
+                    </div>
+                    <a href="{{ route('pages.blogs') }}" class="home-blogs-view-all">
+                        <span>View All Blogs</span>
+                        <i class="fa-solid fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+
+                <div id="blogsHomeCarousel" class="carousel slide home-carousel" data-bs-touch="true" data-bs-interval="false">
+                    <div class="carousel-inner">
+                        @foreach ($blogSlides as $slideIndex => $blogsGroup)
+                            <div class="carousel-item {{ $slideIndex === 0 ? 'active' : '' }}">
+                                <div class="row g-4">
+                                    @foreach ($blogsGroup as $blog)
+                                        <div class="col-md-4">
+                                            <article class="blog-card h-100">
+                                                <div class="blog-card-media">
+                                                    <a href="{{ route('pages.blogs.show', $blog->slug) }}" tabindex="-1" aria-hidden="true">
+                                                        <img src="{{ $blog->image_url }}" alt="{{ $blog->title }}" loading="lazy">
+                                                    </a>
+                                                    <span class="blog-category-tag">{{ $blog->category }}</span>
+                                                    @if ($blog->has_video)
+                                                        <span class="blog-media-type-badge video-badge"><i class="fa-solid fa-play me-1"></i> Video</span>
+                                                    @elseif (!empty($blog->photos) && count($blog->photos) > 0)
+                                                        <span class="blog-media-type-badge gallery-badge"><i class="fa-regular fa-images me-1"></i> Photos</span>
+                                                    @endif
+                                                </div>
+                                                <div class="blog-card-body">
+                                                    <div class="blog-meta-row">
+                                                        <span class="meta-date">
+                                                            <i class="fa-regular fa-calendar-check me-1"></i>
+                                                            {{ $blog->published_at ? $blog->published_at->format('M d, Y') : $blog->created_at->format('M d, Y') }}
+                                                        </span>
+                                                        <span class="meta-read-time">
+                                                            <i class="fa-regular fa-clock me-1"></i>
+                                                            {{ $blog->read_time }}
+                                                        </span>
+                                                    </div>
+                                                    <h3 class="blog-card-title">
+                                                        <a href="{{ route('pages.blogs.show', $blog->slug) }}">{{ $blog->title }}</a>
+                                                    </h3>
+                                                    <p class="blog-card-excerpt">{{ \Illuminate\Support\Str::limit($blog->excerpt, 110) }}</p>
+                                                </div>
+                                                <div class="blog-card-footer d-flex align-items-center justify-content-between">
+                                                    <span class="blog-footer-meta text-muted small">
+                                                        <i class="fa-regular fa-clock me-1"></i> {{ $blog->read_time }}
+                                                    </span>
+                                                    <a href="{{ route('pages.blogs.show', $blog->slug) }}" class="blog-read-link">
+                                                        Read Article <i class="fa-solid fa-arrow-right ms-1"></i>
+                                                    </a>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    @if ($blogSlides->count() > 1)
+                        <div class="home-carousel-controls mt-4">
+                            <button class="carousel-control-prev" type="button" data-bs-target="#blogsHomeCarousel" data-bs-slide="prev" aria-label="Previous blogs">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            </button>
+                            <div class="carousel-indicators">
+                                @foreach ($blogSlides as $slideIndex => $blogsGroup)
+                                    <button type="button" data-bs-target="#blogsHomeCarousel" data-bs-slide-to="{{ $slideIndex }}" class="{{ $slideIndex === 0 ? 'active' : '' }}" aria-label="Blogs slide {{ $slideIndex + 1 }}" {{ $slideIndex === 0 ? 'aria-current=true' : '' }}></button>
+                                @endforeach
+                            </div>
+                            <button class="carousel-control-next" type="button" data-bs-target="#blogsHomeCarousel" data-bs-slide="next" aria-label="Next blogs">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </section>
+    @endif
+
     <section class="home-updates" aria-label="Latest news and upcoming events">
         <div class="home-updates-inner">
             <span class="updates-label">Latest News</span>
             <div class="home-update-tabs">
-                <a class="active" href="{{ route('pages.media-gallery') }}">Latest News</a>
+                <a class="active" href="{{ route('pages.blogs') }}">Latest News &amp; Blogs</a>
+                <a href="{{ route('pages.media-gallery') }}">Media Gallery</a>
                 <a href="{{ route('pages.contact') }}">Upcoming Events</a>
             </div>
-            <a class="updates-more" href="{{ route('pages.media-gallery') }}">See all updates <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            <a class="updates-more" href="{{ route('pages.blogs') }}">See all blogs &amp; updates <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         </div>
     </section>
 

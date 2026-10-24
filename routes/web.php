@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\HomeController;
@@ -33,6 +34,10 @@ Route::controller(PublicPageController::class)->group(function () {
     Route::get('/organization/municipal-bodies', 'showMunicipalBodies')->name('pages.municipal-bodies');
     Route::get('/organization/union-council-bodies', 'showUnionCouncilBodies')->name('pages.union-council-bodies');
     Route::get('/media-gallery', 'showMediaGallery')->name('pages.media-gallery');
+    Route::get('/blogs', 'showBlogs')->name('pages.blogs');
+    Route::get('/blog', 'showBlogs');
+    Route::get('/blogs/{slug}', 'showBlogPost')->name('pages.blogs.show');
+    Route::get('/blog/{slug}', 'showBlogPost');
     Route::get('/members-area', 'showMembers')->name('pages.members');
     Route::get('/members', 'showMembers');
     Route::get('/join', 'showMembership')->name('pages.join');
@@ -123,6 +128,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Gallery
         Route::resource('gallery', GalleryController::class)->parameters(['gallery' => 'gallery'])->except(['show']);
+
+        // Blogs & News (with photo & video upload)
+        Route::resource('blogs', BlogController::class)->except(['show']);
 
         // Submissions Management
         Route::prefix('submissions')->name('submissions.')->group(function () {

@@ -5,7 +5,7 @@
 
 @section('content')
 <main>
-    @unless (in_array($page['layout'] ?? null, ['president', 'general-secretary', 'district-body', 'tehsil-bodies', 'leadership', 'union-councils', 'municipal-bodies', 'media-gallery', 'membership', 'contact', 'members'], true))
+    @unless (in_array($page['layout'] ?? null, ['president', 'general-secretary', 'district-body', 'tehsil-bodies', 'leadership', 'union-councils', 'municipal-bodies', 'media-gallery', 'membership', 'contact', 'members', 'blogs', 'blog-post'], true))
         <section class="page-banner">
             <div class="container">
                 <nav aria-label="Breadcrumb">
@@ -21,7 +21,7 @@
         </section>
     @endunless
 
-    <section class="page-main section-space {{ in_array($page['layout'] ?? null, ['president', 'general-secretary', 'district-body', 'tehsil-bodies', 'leadership', 'union-councils'], true) ? 'president-page-main' : '' }} {{ ($page['layout'] ?? null) === 'media-gallery' ? 'media-gallery-page-main' : '' }} {{ in_array($page['layout'] ?? null, ['membership', 'members'], true) ? 'membership-page-main' : '' }} {{ ($page['layout'] ?? null) === 'contact' ? 'contact-page-main' : '' }} {{ ($page['layout'] ?? null) === 'municipal-bodies' ? 'municipal-page-main' : '' }}">
+    <section class="page-main section-space {{ in_array($page['layout'] ?? null, ['president', 'general-secretary', 'district-body', 'tehsil-bodies', 'leadership', 'union-councils'], true) ? 'president-page-main' : '' }} {{ ($page['layout'] ?? null) === 'media-gallery' ? 'media-gallery-page-main' : '' }} {{ in_array($page['layout'] ?? null, ['membership', 'members'], true) ? 'membership-page-main' : '' }} {{ ($page['layout'] ?? null) === 'contact' ? 'contact-page-main' : '' }} {{ ($page['layout'] ?? null) === 'municipal-bodies' ? 'municipal-page-main' : '' }} {{ in_array($page['layout'] ?? null, ['blogs', 'blog-post'], true) ? 'blogs-page-main' : '' }}">
         <div class="container">
             @if (session('status'))
                 <div class="alert alert-success submission-alert" role="status">{{ session('status') }}</div>
@@ -286,6 +286,10 @@
                 @include('pages.membership')
             @elseif (($page['layout'] ?? null) === 'members' || ($page['type'] ?? null) === 'members')
                 @include('pages.members')
+            @elseif (($page['layout'] ?? null) === 'blogs' || ($page['type'] ?? null) === 'blogs')
+                @include('pages.blogs')
+            @elseif (($page['layout'] ?? null) === 'blog-post' || ($page['type'] ?? null) === 'blog-post')
+                @include('pages.blog-post')
             @elseif ($page['type'] === 'contact')
                 <header class="contact-page-heading">
                     <h1>Suggestions/ <span>Complaints/</span> <strong>Contacts</strong></h1>

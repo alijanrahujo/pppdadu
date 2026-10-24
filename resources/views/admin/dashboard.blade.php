@@ -160,6 +160,10 @@
                         <span><i class="fa-solid fa-city me-2 text-warning"></i> Municipal &amp; Town Bodies</span>
                         <i class="fa-solid fa-chevron-right text-muted small"></i>
                     </a>
+                    <a href="{{ route('admin.blogs.index') }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3">
+                        <span><i class="fa-solid fa-newspaper me-2 text-danger"></i> Blogs &amp; News Stories</span>
+                        <span class="badge bg-danger rounded-pill">{{ $blogCount ?? 0 }}</span>
+                    </a>
                     <a href="{{ route('admin.gallery.index') }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3">
                         <span><i class="fa-solid fa-images me-2 text-warning"></i> Media Gallery Photos</span>
                         <i class="fa-solid fa-chevron-right text-muted small"></i>

@@ -6,6 +6,17 @@
     <meta name="description" content="{{ $description ?? 'Pakistan Peoples Party District Dadu: committed to democracy, social justice and the welfare of the people.' }}">
     <meta name="theme-color" content="#0b603d">
     <title>{{ $title ?? 'Pakistan Peoples Party | District Dadu' }}</title>
+    <!-- PWA Manifest & App Icons -->
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="PPP Dadu">
+    <!-- iOS PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="PPP Dadu">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('pwa/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('pwa/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('pwa/favicon-16x16.png') }}">
     <link rel="stylesheet" href="{{ asset('Assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('Assets/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('css/site.css') }}?v={{ file_exists(public_path('css/site.css')) ? filemtime(public_path('css/site.css')) : time() }}">
@@ -19,6 +30,10 @@
                     <span class="brand-name">{{ $siteSettings['site.name'] ?? 'Pakistan Peoples Party' }} <small>{{ $siteSettings['site.district'] ?? 'District Dadu' }}</small></span>
                 </a>
                 <div class="masthead-actions">
+                    <button type="button" class="masthead-app-install-btn pwa-trigger-btn" aria-label="Download PPP Dadu Mobile App">
+                        <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>
+                        <span>Download App</span>
+                    </button>
                     <a class="masthead-join" href="{{ route('pages.join') }}">
                         <i class="fa-solid fa-people-group" aria-hidden="true"></i>
                         <span>Join PPP</span>
@@ -102,6 +117,9 @@
                 <a class="site-menu-item {{ request()->routeIs('pages.media-gallery') ? 'active' : '' }}" href="{{ route('pages.media-gallery') }}">
                     <i class="fa-regular fa-image" aria-hidden="true"></i><span>Media Gallery</span>
                 </a>
+                <a class="site-menu-item {{ request()->routeIs('pages.blogs*') ? 'active' : '' }}" href="{{ route('pages.blogs') }}">
+                    <i class="fa-solid fa-newspaper" aria-hidden="true"></i><span>Blogs &amp; News</span>
+                </a>
                 <a class="site-menu-item {{ request()->routeIs('pages.members') ? 'active' : '' }}" href="{{ route('pages.members') }}">
                     <i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>Members Area</span>
                 </a>
@@ -138,6 +156,7 @@
                         <a href="{{ route('pages.municipal-bodies') }}">Municipal &amp; Town Bodies</a>
                         <a href="{{ route('pages.union-council-bodies') }}">Union Council Bodies</a>
                         <a href="{{ route('pages.media-gallery') }}">Media Gallery</a>
+                        <a href="{{ route('pages.blogs') }}">Blogs &amp; News</a>
                         <a href="{{ route('pages.members') }}">Members Area</a>
                     </nav>
                 </div>
@@ -151,6 +170,7 @@
             <div class="footer-bottom">
                 <span>&copy; <span data-current-year>2026</span> {{ $siteSettings['site.name'] ?? 'Pakistan Peoples Party' }} {{ $siteSettings['site.district'] ?? 'District Dadu' }}</span>
                 <div class="footer-bottom-links">
+                    <a href="javascript:void(0)" class="pwa-trigger-btn me-3"><i class="fa-solid fa-mobile-screen-button me-1" aria-hidden="true"></i> Download App</a>
                     <a href="{{ route('admin.dashboard') }}" class="footer-admin-link me-3"><i class="fa-solid fa-lock" aria-hidden="true"></i> Admin Panel</a>
                     <a href="{{ route('home') }}#home">Back to top <i class="fa-solid fa-arrow-up ms-1" aria-hidden="true"></i></a>
                 </div>
@@ -158,8 +178,90 @@
         </div>
     </footer>
 
+    <!-- PWA Download / Installation Modal -->
+    <div class="modal fade" id="pwaModal" tabindex="-1" aria-labelledby="pwaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="pwa-modal-header d-flex justify-content-between align-items-center">
+                    <div class="pwa-app-badge-box">
+                        <img src="{{ asset('pwa/icon-192x192.png') }}" alt="PPP Dadu Logo" class="pwa-app-logo">
+                        <div class="pwa-app-info">
+                            <h4 id="pwaModalLabel">PPP District Dadu</h4>
+                            <p>Official Mobile Application</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <!-- Feature Pills -->
+                    <div class="d-flex flex-wrap gap-2 mb-4 justify-content-center">
+                        <span class="pwa-feature-pill"><i class="fa-solid fa-bolt text-warning"></i> Fast Performance</span>
+                        <span class="pwa-feature-pill"><i class="fa-solid fa-wifi text-success"></i> Offline Reading</span>
+                        <span class="pwa-feature-pill"><i class="fa-solid fa-bell text-danger"></i> Latest Party News</span>
+                    </div>
+
+                    <!-- Platform Selector Tabs -->
+                    <div class="d-flex gap-2 mb-3" role="tablist">
+                        <button type="button" class="pwa-platform-tab-btn active" id="pwaAndroidTab" data-platform="android">
+                            <i class="fa-brands fa-android fs-5 text-success"></i>
+                            <span>Android</span>
+                        </button>
+                        <button type="button" class="pwa-platform-tab-btn" id="pwaIosTab" data-platform="ios">
+                            <i class="fa-brands fa-apple fs-5"></i>
+                            <span>iPhone / iOS</span>
+                        </button>
+                    </div>
+
+                    <!-- Android Panel -->
+                    <div id="pwaAndroidPanel" class="pwa-platform-content">
+                        <div class="text-center py-3">
+                            <p class="text-muted small mb-3">
+                                Tap the button below to install the official PPP Dadu app directly to your home screen with zero app store hassle.
+                            </p>
+                            <button type="button" class="btn btn-success btn-lg px-4 py-2 fw-bold w-100 shadow-sm" id="pwaNativeInstallBtn">
+                                <i class="fa-brands fa-android me-2"></i> Install on Android
+                            </button>
+                            <div class="small text-muted mt-3">
+                                <i class="fa-solid fa-circle-check text-success me-1"></i> Works on Chrome, Samsung Internet, Brave &amp; Edge
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- iOS Panel -->
+                    <div id="pwaIosPanel" class="pwa-platform-content d-none">
+                        <p class="text-muted small mb-3 text-center">
+                            Follow these 3 quick steps in <strong>Safari</strong> on your iPhone or iPad:
+                        </p>
+                        <div class="pwa-ios-step">
+                            <div class="pwa-ios-step-num">1</div>
+                            <div class="pwa-ios-step-text">
+                                In <strong>Safari</strong>, tap the <strong>Share</strong> button <span class="pwa-ios-pill"><i class="fa-solid fa-arrow-up-from-bracket text-primary"></i></span> in the bottom toolbar.
+                            </div>
+                        </div>
+                        <div class="pwa-ios-step">
+                            <div class="pwa-ios-step-num">2</div>
+                            <div class="pwa-ios-step-text">
+                                Scroll down the menu and tap <span class="pwa-ios-pill"><i class="fa-solid fa-square-plus text-success"></i> Add to Home Screen</span>.
+                            </div>
+                        </div>
+                        <div class="pwa-ios-step">
+                            <div class="pwa-ios-step-num">3</div>
+                            <div class="pwa-ios-step-text">
+                                Tap <span class="pwa-ios-pill fw-bold">Add</span> in the top-right corner. The PPP Dadu icon will appear on your Home Screen!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light p-3 justify-content-between border-top">
+                    <span class="small text-muted"><i class="fa-solid fa-shield-halved text-success me-1"></i> Safe &amp; Verified Official App</span>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="{{ asset('Assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('Assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('js/site.js') }}"></script>
+    <script src="{{ asset('js/site.js') }}?v={{ file_exists(public_path('js/site.js')) ? filemtime(public_path('js/site.js')) : time() }}"></script>
 </body>
 </html>

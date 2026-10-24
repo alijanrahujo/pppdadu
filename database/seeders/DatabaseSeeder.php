@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             MembershipSeeder::class,
             WebsiteContentSeeder::class,
             WebsiteSubmissionSeeder::class,
+            BlogSeeder::class,
         ]);
     }
 }

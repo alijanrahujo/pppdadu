@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\GalleryItem;
 use App\Models\Leader;
 use App\Models\UnionCouncil;
@@ -20,6 +21,7 @@ class DashboardController extends Controller
         $newMembershipCount = WebsiteSubmission::query()->where('submission_type', 'membership')->where('status', 'new')->count();
         $contactCount = WebsiteSubmission::query()->where('submission_type', 'contact')->count();
         $newContactCount = WebsiteSubmission::query()->where('submission_type', 'contact')->where('status', 'new')->count();
+        $blogCount = Blog::query()->count();
         $galleryCount = GalleryItem::query()->count();
         $leaderCount = Leader::query()->count();
         $councilCount = UnionCouncil::query()->count();
@@ -41,6 +43,7 @@ class DashboardController extends Controller
             'newMembershipCount' => $newMembershipCount,
             'contactCount' => $contactCount,
             'newContactCount' => $newContactCount,
+            'blogCount' => $blogCount,
             'galleryCount' => $galleryCount,
             'leaderCount' => $leaderCount,
             'councilCount' => $councilCount,

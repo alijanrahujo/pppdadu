@@ -105,7 +105,6 @@
                             Remember me
                         </label>
                     </div>
-                    <span class="badge bg-light text-muted border">Default: admin123</span>
                 </div>
 
                 <button type="submit" class="admin-btn admin-btn-primary w-100 py-2 fs-6">

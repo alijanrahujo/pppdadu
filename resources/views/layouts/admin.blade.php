@@ -136,6 +136,12 @@
 
                 <li class="admin-nav-section">Media &amp; Submissions</li>
                 <li class="admin-nav-item">
+                    <a href="{{ route('admin.blogs.index') }}" class="admin-nav-link {{ request()->routeIs('admin.blogs.*') ? 'active' : '' }}">
+                        <i class="fa-solid fa-newspaper"></i>
+                        <span>Blogs &amp; News</span>
+                    </a>
+                </li>
+                <li class="admin-nav-item">
                     <a href="{{ route('admin.gallery.index') }}" class="admin-nav-link {{ request()->routeIs('admin.gallery.*') ? 'active' : '' }}">
                         <i class="fa-regular fa-images"></i>
                         <span>Media Gallery</span>

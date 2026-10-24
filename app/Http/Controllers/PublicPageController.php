@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\GalleryItem;
 use App\Models\Leader;
 use App\Models\Membership;
@@ -48,6 +49,9 @@ class PublicPageController extends Controller
         }
         $activitySlides = $galleryFeatured->isNotEmpty() ? $galleryFeatured->chunk(4) : collect();
 
+        $latestBlogs = Blog::published()->take(9)->get();
+        $blogSlides = $latestBlogs->isNotEmpty() ? $latestBlogs->chunk(3) : collect();
+
         return view('home', compact(
             'hero',
             'values',
@@ -55,7 +59,8 @@ class PublicPageController extends Controller
             'about',
             'join',
             'leadershipSlides',
-            'activitySlides'
+            'activitySlides',
+            'blogSlides'
         ));
     }
 
@@ -97,6 +102,89 @@ class PublicPageController extends Controller
     public function showMediaGallery(): View
     {
         return $this->page('media-gallery');
+    }
+
+    public function showBlogs(Request $request): View
+    {
+        $search = $request->query('search');
+        $category = $request->query('category');
+
+        $query = Blog::query()->published();
+
+        if (! empty($search)) {
+            $search = trim((string) $search);
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('excerpt', 'like', "%{$search}%")
+                    ->orWhere('content', 'like', "%{$search}%");
+            });
+        }
+
+        if (! empty($category) && $category !== 'all') {
+            $query->where('category', $category);
+        }
+
+        $blogs = $query->paginate(9)->withQueryString();
+
+        $featuredBlog = Blog::published()->where('is_featured', true)->first();
+        if (! $featuredBlog && $blogs->isNotEmpty()) {
+            $featuredBlog = $blogs->first();
+        }
+
+        $categories = Blog::where('is_published', true)->distinct()->pluck('category')->filter()->values()->all();
+        if (empty($categories)) {
+            $categories = ['Development & Welfare', 'Party News', 'Press Releases', 'Speeches & Statements', 'Youth & Community'];
+        }
+
+        $recentPosts = Blog::published()->take(4)->get();
+
+        $page = [
+            'type' => 'blogs',
+            'layout' => 'blogs',
+            'title' => 'Blogs & News',
+            'eyebrow' => 'Latest Updates',
+            'subtitle' => 'Official news, developmental updates, statements and stories from Pakistan Peoples Party District Dadu.',
+            'blogs' => $blogs,
+            'featuredBlog' => $featuredBlog,
+            'categories' => $categories,
+            'search' => $search,
+            'currentCategory' => $category,
+            'recentPosts' => $recentPosts,
+        ];
+
+        return view('pages.show', ['page' => $page]);
+    }
+
+    public function showBlogPost(string $slug): View
+    {
+        $blog = Blog::published()->where('slug', $slug)->firstOrFail();
+
+        $blog->increment('views_count');
+
+        $relatedPosts = Blog::published()
+            ->where('id', '!=', $blog->id)
+            ->where('category', $blog->category)
+            ->take(3)
+            ->get();
+
+        if ($relatedPosts->isEmpty()) {
+            $relatedPosts = Blog::published()
+                ->where('id', '!=', $blog->id)
+                ->take(3)
+                ->get();
+        }
+
+        $page = [
+            'type' => 'blog-post',
+            'layout' => 'blog-post',
+            'title' => $blog->title,
+            'eyebrow' => $blog->category,
+            'subtitle' => $blog->excerpt,
+            'blog' => $blog,
+            'relatedPosts' => $relatedPosts,
+        ];
+
+        return view('pages.show', ['page' => $page]);
     }
 
     public function showMembers(): View

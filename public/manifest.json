@@ -1,0 +1,100 @@
+{
+  "name": "Pakistan Peoples Party - District Dadu",
+  "short_name": "PPP Dadu",
+  "description": "Official mobile application and digital portal for Pakistan Peoples Party (PPP) District Dadu.",
+  "id": "/?pwa=1",
+  "start_url": "/?pwa=1",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui",
+    "browser"
+  ],
+  "orientation": "portrait-primary",
+  "background_color": "#0b603d",
+  "theme_color": "#0b603d",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": [
+    "news",
+    "politics",
+    "government",
+    "community"
+  ],
+  "icons": [
+    {
+      "src": "/pwa/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa/icon-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/pwa/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Blogs & News",
+      "short_name": "Blogs",
+      "description": "Read latest articles, press releases, and media stories",
+      "url": "/blogs",
+      "icons": [
+        {
+          "src": "/pwa/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Join PPP",
+      "short_name": "Join",
+      "description": "Online membership portal for District Dadu",
+      "url": "/join",
+      "icons": [
+        {
+          "src": "/pwa/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Our Leadership",
+      "short_name": "Leadership",
+      "description": "View central and district party leadership",
+      "url": "/leadership",
+      "icons": [
+        {
+          "src": "/pwa/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Media Gallery",
+      "short_name": "Gallery",
+      "description": "Browse party rallies, events, and convention photos",
+      "url": "/media-gallery",
+      "icons": [
+        {
+          "src": "/pwa/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
