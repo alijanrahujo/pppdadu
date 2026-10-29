@@ -132,12 +132,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Blogs & News (with photo & video upload)
         Route::resource('blogs', BlogController::class)->except(['show']);
 
-        // Submissions Management
+        // Submissions & Memberships Management
         Route::prefix('submissions')->name('submissions.')->group(function () {
             Route::get('/memberships', [SubmissionController::class, 'memberships'])->name('memberships');
+            Route::patch('/memberships/{membership}/status', [SubmissionController::class, 'updateMembershipStatus'])->name('memberships.status');
+            Route::delete('/memberships/{membership}', [SubmissionController::class, 'destroyMembership'])->name('memberships.destroy');
+
             Route::get('/contacts', [SubmissionController::class, 'contacts'])->name('contacts');
-            Route::patch('/{submission}/status', [SubmissionController::class, 'updateStatus'])->name('status');
-            Route::delete('/{submission}', [SubmissionController::class, 'destroy'])->name('destroy');
+            Route::patch('/contacts/{contact}/status', [SubmissionController::class, 'updateContactStatus'])->name('contacts.status');
+            Route::delete('/contacts/{contact}', [SubmissionController::class, 'destroyContact'])->name('contacts.destroy');
         });
     });
 });

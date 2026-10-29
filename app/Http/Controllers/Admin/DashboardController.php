@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\Contact;
 use App\Models\GalleryItem;
 use App\Models\Leader;
+use App\Models\Membership;
 use App\Models\UnionCouncil;
-use App\Models\WebsiteSubmission;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
@@ -17,23 +18,21 @@ class DashboardController extends Controller
      */
     public function index(): View
     {
-        $membershipCount = WebsiteSubmission::query()->where('submission_type', 'membership')->count();
-        $newMembershipCount = WebsiteSubmission::query()->where('submission_type', 'membership')->where('status', 'new')->count();
-        $contactCount = WebsiteSubmission::query()->where('submission_type', 'contact')->count();
-        $newContactCount = WebsiteSubmission::query()->where('submission_type', 'contact')->where('status', 'new')->count();
+        $membershipCount = Membership::query()->count();
+        $newMembershipCount = Membership::query()->where('status', 'new')->count();
+        $contactCount = Contact::query()->count();
+        $newContactCount = Contact::query()->where('status', 'new')->count();
         $blogCount = Blog::query()->count();
         $galleryCount = GalleryItem::query()->count();
         $leaderCount = Leader::query()->count();
         $councilCount = UnionCouncil::query()->count();
 
-        $recentMemberships = WebsiteSubmission::query()
-            ->where('submission_type', 'membership')
+        $recentMemberships = Membership::query()
             ->latest()
             ->take(5)
             ->get();
 
-        $recentContacts = WebsiteSubmission::query()
-            ->where('submission_type', 'contact')
+        $recentContacts = Contact::query()
             ->latest()
             ->take(5)
             ->get();

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Membership;
 use Illuminate\Database\Seeder;
 
 class MembershipSeeder extends Seeder
@@ -12,6 +12,6 @@ class MembershipSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Membership::factory()->count(10)->create();
+        Membership::factory()->count(10)->create();
     }
 }

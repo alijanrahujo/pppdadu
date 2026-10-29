@@ -87,7 +87,7 @@
                             <button type="button" class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="modal" data-bs-target="#modalSub{{ $sub->id }}">
                                 <i class="fa-solid fa-eye me-1"></i> View Details
                             </button>
-                            <form action="{{ route('admin.submissions.destroy', $sub) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this application record?');">
+                            <form action="{{ route('admin.submissions.memberships.destroy', $sub) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this application record?');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-outline-danger">
@@ -222,7 +222,7 @@
                                     <hr class="my-4">
 
                                     <!-- Status Update -->
-                                    <form action="{{ route('admin.submissions.status', $sub) }}" method="POST" class="d-flex align-items-center justify-content-between">
+                                    <form action="{{ route('admin.submissions.memberships.status', $sub) }}" method="POST" class="d-flex align-items-center justify-content-between">
                                         @csrf
                                         @method('PATCH')
                                         <div class="d-flex align-items-center gap-2">

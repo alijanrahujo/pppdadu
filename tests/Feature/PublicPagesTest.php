@@ -2,10 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\WebsiteSubmission;
+use App\Models\Membership;
 use Database\Seeders\WebsiteContentSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class PublicPagesTest extends TestCase
@@ -172,12 +171,11 @@ class PublicPagesTest extends TestCase
         }
     }
 
-    public function test_membership_submission_is_saved_with_encrypted_personal_data(): void
+    public function test_membership_submission_is_saved_to_memberships_table(): void
     {
         $cnic = '42101-1234567-1';
         $firstName = 'Example';
         $lastName = 'Applicant';
-        $name = 'Example Applicant';
 
         $this->from(route('pages.join'))
             ->post(route('pages.join.store'), [
@@ -207,15 +205,11 @@ class PublicPagesTest extends TestCase
             ->assertRedirect(route('pages.join'))
             ->assertSessionHas('status', 'Your membership application has been received.');
 
-        $submission = WebsiteSubmission::query()->firstOrFail();
-        $this->assertSame('membership', $submission->submission_type);
-        $this->assertSame($name, $submission->payload['full_name']);
-        $this->assertSame('4210112345671', $submission->payload['cnic_number']);
-
-        $encryptedPayload = DB::table('website_submissions')->value('payload');
-        $this->assertIsString($encryptedPayload);
-        $this->assertStringNotContainsString($name, $encryptedPayload);
-        $this->assertStringNotContainsString('4210112345671', $encryptedPayload);
+        $member = Membership::query()->firstOrFail();
+        $this->assertSame($firstName, $member->first_name);
+        $this->assertSame($lastName, $member->last_name);
+        $this->assertSame('4210112345671', $member->cnic_number);
+        $this->assertSame('Primary Member', $member->member_type);
     }
 
     public function test_invalid_contact_submission_does_not_flash_sensitive_form_values(): void
@@ -231,6 +225,6 @@ class PublicPagesTest extends TestCase
             ->assertSessionHasErrors('cnic_number')
             ->assertSessionMissing('_old_input');
 
-        $this->assertDatabaseCount('website_submissions', 0);
+        $this->assertDatabaseCount('contacts', 0);
     }
 }
